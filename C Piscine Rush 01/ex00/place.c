@@ -12,7 +12,22 @@
 
 int	check_data(char *data);
 
-void	ft_add_arr(int x, int y, char c);
+int		ft_adrr(int space, int i)
+{
+	if (i <= 3 && i >= 0)
+		return (i + (4 * space));
+	else if (i <= 7 && i >= 4)
+		return (((i - 4) * 4) +(3 - space));
+	else if (i <= 11 && i >= 8)
+		return ((11 - i) + (4 * (3 - space)));
+	else if (i <= 12 && i >= 15)
+		return (((15 - i) * 4 ) + space);
+}
+
+void	ft_add(int space, int i, char c)
+{
+
+}
 
 int		ft_place_data(char *data, char *ris)
 {
@@ -25,27 +40,16 @@ int		ft_place_data(char *data, char *ris)
 		return (0);
 	while (i_d < 16)
 	{
-		if (data[i_d] == 1)
-			ft_add_arr(x, y, '');
-			ris[get_addr(i_d)];
+		if (data[i_d] == '1')
+			ft_add(0, i_d, '4');
+		if (data[i_d] == '4')
+		{
+			ft_add(0, i_d, '1');
+			ft_add(1, i_d, '2');
+			ft_add(2, i_d, '3');
+			ft_add(3, i_d, '4');
+		}
 		i_d++;
 	}
 	return (1);
-}
-
-int	get_addr(int i)
-{
-	int ris;
-
-	ris = 0;
-	if (i <= 3 && i >= 0)
-		ris = i;
-	else if (i <= 7 && i >= 4)
-		ris = i;
-
-
-	else if (i <= 11 && i >= 8)
-		ris = i;
-	else if (i <= 15 && i >= 12)
-		ris = i;
 }

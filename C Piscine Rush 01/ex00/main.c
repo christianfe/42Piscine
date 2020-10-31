@@ -34,7 +34,7 @@ int		ft_create_data(char *data, char *value)
 	a = 0;
 	while (i < 32)
 	{
-		if (*(value + i) >= '0' && *(value + i) <= '4')
+		if (*(value + i) >= '1' && *(value + i) <= '4')
 			data[a] = *(value + i);
 		else
 			return (0);
@@ -44,6 +44,8 @@ int		ft_create_data(char *data, char *value)
 			return (0);
 		i++;
 	}
+	if (data[32] != 0)
+		return(0);
 	return (1);
 }
 
@@ -72,11 +74,11 @@ int		main(int argc, char **argv)
 	{
 		if (!ft_create_data(&data[0][0], argv[1]))
 		{
-			ft_putstr("Error2\n");
+			ft_putstr("Error\n");
 			return (0);
 		}
-		ft_putarr(&data[0][0]);
-		ft_place_data(&data[0][0], &ris[0][0]);
+		//ft_putarr(&data[0][0]);
+		if ... ft_place_data(&data[0][0], &ris[0][0]);
 	}
 	else
 		ft_putstr("Error");
