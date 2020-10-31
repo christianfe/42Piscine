@@ -92,6 +92,32 @@ int		ft_place_data(char *data, char *ris)
 			ris[ft_adrr(2, i_d)] = '1';
 			ris[ft_adrr(3, i_d)] = '2';
 		}
+		if (data[i_d] == '3' && check_opposite(data, i_d, '2') && ris[ft_adrr(2, i_d)] == '4' && ris[ft_adrr(3, i_d)] == '2')
+		{
+			if (ris[ft_adrr(0, i_d)] != '1' && ris[ft_adrr(1, i_d)] != '3')
+				change = 1;
+			ris[ft_adrr(0, i_d)] = '1';
+			ris[ft_adrr(1, i_d)] = '3';
+		}
+		if (data[i_d] == '2' && check_opposite(data, i_d, '3') && ris[ft_adrr(0, i_d)] == '3' && ris[ft_adrr(1, i_d)] == '4')
+		{
+			if (ris[ft_adrr(3, i_d)] != '1' && ris[ft_adrr(2, i_d)] != '2')
+				change = 1;
+			ris[ft_adrr(3, i_d)] = '1';
+			ris[ft_adrr(2, i_d)] = '2';
+		}
+		if (data[i_d] == '1' && check_opposite(data, i_d, '2') && ris[ft_adrr(0, i_d)] == '4')
+		{
+			if (ris[ft_adrr(3, i_d)] != '3')
+				change = 1;
+			ris[ft_adrr(3, i_d)] = '3';
+		}
+		if (data[i_d] == '3' && check_opposite(data, i_d, '1') && ris[ft_adrr(3, i_d)] == '4')
+		{
+			if (ris[ft_adrr(0, i_d)] != '2')
+				change = 1;
+			ris[ft_adrr(0, i_d)] = '2';
+		}
 		if (change == 1)
 			i_d = 0;
 		else 
