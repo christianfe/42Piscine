@@ -6,7 +6,7 @@
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:48:59 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/10/30 09:03:05 by cfelicio         ###   ########.fr       */
+/*   Updated: 2020/10/31 09:25:14 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,19 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	i = 0;
 	if (!(ft_check_base(base_from) && ft_check_base(base_to)))
 		return (0);
+	while (*(nbr + i) == ' ')
+		i++;
+	while (*(nbr + i) == '+' || *(nbr + i) == '-')
+		i++;
+	while (i < ft_strlen(nbr))
+	{
+		if (!ft_char_is_in_base((nbr + i), base_from))
+			return (0);
+		i++;
+	}
+	i = 0;
 	nb = ft_atoi_base(nbr, base_from);
-	dest = malloc(nb * ft_strlen(base_to));
+	dest = (char *)malloc(ft_strlen(base_from) * ft_strlen(base_to) * sizeof(char) );
 	ft_putnbr_base(nb, base_to, dest);
 	while (ft_char_is_in_base((dest + i), base_to))
 		i++;
