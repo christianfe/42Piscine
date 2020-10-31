@@ -6,7 +6,7 @@
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 10:02:19 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/10/31 10:56:53 by cfelicio         ###   ########.fr       */
+/*   Updated: 2020/10/31 11:14:34 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_putstr(char *str)
 	}
 }
 
-
 int		ft_create_data(char *data, char *value)
 {
 	int i;
@@ -31,7 +30,7 @@ int		ft_create_data(char *data, char *value)
 
 	i = 0;
 	a = 0;
-	while (i < 31)
+	while (i < 32)
 	{
 		if (*(value + i) >= '0' && *(value + i) <= '4')
 			data[a] = *(value + i);
@@ -39,7 +38,7 @@ int		ft_create_data(char *data, char *value)
 			return (0);
 		i++;
 		a++;
-		if (*(value + i) != ' ')
+		if (*(value + i) != ' ' && i < 31)
 			return (0);
 		i++;
 	}
@@ -65,9 +64,17 @@ void 	ft_putarr(char *arr)
 int		main(int argc, char **argv)
 {
 	char data[4][4];
+
 	if (argc == 2)
+	{
 		if(!ft_create_data(&data[0][0], argv[1]))
-			ft_putstr("Error");
-	ft_putarr(&data[0][0]);
+		{
+			ft_putstr("Error2\n");
+			return (0);
+		}
+		ft_putarr(&data[0][0]);
+	}
+	else
+		ft_putstr("Error");
 	return 0;
 }
