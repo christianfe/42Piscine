@@ -16,7 +16,7 @@
 
 int		ft_place_data(char *data, char *ris);
 
-int	ft_strlen(char *str)
+int		ft_strlen(char *str)
 {
 	char	*charptr;
 	int		i;

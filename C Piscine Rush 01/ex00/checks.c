@@ -14,7 +14,7 @@
 
 void	ft_putstr(char *str);
 
-int	check_four(char *arr, int start, char to_find)
+int		check_four(char *arr, int start, char to_find)
 {
 	int i;
 	int find;
@@ -30,7 +30,7 @@ int	check_four(char *arr, int start, char to_find)
 	return (find);
 }
 
-int	check_opposite(char *arr, int n, char to_find) 
+int		check_opposite(char *arr, int n, char to_find)
 {
 	if ((n >= 0 && n <= 3) || (n >= 8 && n <= 11))
 		n += 4;
@@ -42,19 +42,22 @@ int	check_opposite(char *arr, int n, char to_find)
 		return (0);
 }
 
-int	check_data(char *data)
+int		check_data(char *data)
 {
 	int i;
 
 	i = 0;
 	while (i < 16)
 	{
-		if (i != 0 &&( (i % 4 == 0) || i == 0))
+		if (i != 0 && ((i % 4 == 0) || i == 0))
 		{
 			if (check_four(data, i, '1') != 1)
 				return (0);
 			if (check_four(data, i, '4') > 1)
 				return (0);
+			if (data[i] == '4')
+				if (!(check_opposite(data, i, '1')))
+					return (0);
 		}
 		i++;
 	}
