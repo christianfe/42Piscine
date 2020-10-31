@@ -76,7 +76,7 @@ int		main(int argc, char **argv)
 			return (0);
 		}
 		ft_putarr(&data[0][0]);
-		ft_place_data(data, ris);
+		ft_place_data(&data[0][0], &ris[0][0]);
 	}
 	else
 		ft_putstr("Error");
