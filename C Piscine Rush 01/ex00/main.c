@@ -95,6 +95,7 @@ int		main(int argc, char **argv)
 		if (!ft_place_data(&data[0][0], &ris[0][0]))
 		{
 			ft_putstr("Error2\n");
+			
 			return (0);
 		}
 		ft_putarr(&ris[0][0]);

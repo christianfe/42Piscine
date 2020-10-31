@@ -63,3 +63,34 @@ int		check_data(char *data)
 	}
 	return (1);
 }
+
+char	get_x(char *data, int i, int x, int type)
+{
+	int punt;
+
+	if (i <= 3 && i >= 0)
+	{
+		punt = 12 + x;
+		if (type < 0)
+			punt -= 4;
+	}
+	if (i <= 7 && i >= 4)
+	{
+		punt = 8 + (3 - x);
+		if (type < 0)
+			punt -= 4;
+	}
+	if (i <= 11 && i >= 8)
+	{
+		punt = 4 + x;
+		if (type < 0)
+			punt -= 4;
+	}
+	if (i <= 15 && i >= 12)
+	{
+		punt = 4 + (3 - x);
+		if (type < 0)
+			punt -=4;
+	}
+	return (data[punt]);
+}
