@@ -84,10 +84,7 @@ int		main(int argc, char **argv)
 {
 	char data[4][4];
 	char ris[4][4];
-	int i[2];
-	
-	i[0] = 0;
-	i[1] = 0;
+
 	if (argc == 2)
 	{
 		if (!ft_create_data(&data[0][0], argv[1]))
@@ -95,18 +92,6 @@ int		main(int argc, char **argv)
 			ft_putstr("Error\n");
 			return (0);
 		}
-		/*while(i[0] <4)
-		{
-			while(i[1] < 4)
-			{
-				ris[i[0]][i[1]] = '0';
-				i[1]++;
-			}
-			i[1] = 0;
-			i[0]++;
-		}*/
-		/*ft_putarr(&data[0][0]);
-		ft_putstr("\n");**/
 		if (!ft_place_data(&data[0][0], &ris[0][0]))
 		{
 			ft_putstr("Error2\n");

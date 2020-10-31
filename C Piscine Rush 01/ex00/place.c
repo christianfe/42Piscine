@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 
-int	check_data(char *data);
-int	check_opposite(char *arr, int n, char to_find);
+int		check_data(char *data);
+int		check_opposite(char *arr, int n, char to_find);
 void	ft_putstr(char *str);
 
 int		ft_adrr(int space, int i)
@@ -33,49 +34,43 @@ int		ft_adrr(int space, int i)
 int		ft_place_data(char *data, char *ris)
 {
 	int i_d;
+	int i;
+	int change;
 
 	i_d = 0;
+	i = 0;
+	change = 0;
 	if (!check_data(data))
 		return (0);
-	while (i_d < 16)
+	while (i < 20)
 	{
-		if (data[i_d] == '1')
+		while (i_d < 16)
 		{
-			ft_place_data(data, ris);
-			ris[ft_adrr(0, i_d)] = '4';
-		}
-		else if (data[i_d] == '4')
-		{
-			if (ris[ft_adrr(0, i_d)] != '1' && ris[ft_adrr(1, i_d)] != '2' && ris[ft_adrr(2, i_d)] != '3' && ris[ft_adrr(3, i_d)] != '4')
+			if (data[i_d] == '1')
+				ris[ft_adrr(0, i_d)] = '4';
+			if (data[i_d] == '4')
 			{
-				printf ("r2\n");
-				i_d = -1;
+				ris[ft_adrr(0, i_d)] = '1';
+				ris[ft_adrr(1, i_d)] = '2';
+				ris[ft_adrr(2, i_d)] = '3';
+				ris[ft_adrr(3, i_d)] = '4';
 			}
-			ris[ft_adrr(0, i_d)] = '1';
-			ris[ft_adrr(1, i_d)] = '2';
-			ris[ft_adrr(2, i_d)] = '3';
-			ris[ft_adrr(3, i_d)] = '4';
-		}
-		else if (data[i_d] == '3' && check_opposite(data, i_d, '2'))
-		{
-			if (ris[ft_adrr(2, i_d)] != '4')
+			if (data[i_d] == '3' && check_opposite(data, i_d, '2'))
+				ris[ft_adrr(2, i_d)] = '4';
+			if (data[i_d] == '2' && check_opposite(data, i_d, '2') && ris[ft_adrr(0, i_d)] == '3' && ris[ft_adrr(2, i_d)] == '4')
+				ris[ft_adrr(1, i_d)] = '1';
+			if (data[i_d] == '3' && check_opposite(data, i_d, '1') && ris[ft_adrr(0, i_d)] == '1' && ris[ft_adrr(3, i_d)] == '4')
 			{
-				printf ("r3\n");
-				i_d = -1;
+				ris[ft_adrr(1, i_d)] = '3';
+				ris[ft_adrr(2, i_d)] = '2';
 			}
-			ris[ft_adrr(2, i_d)] = '4';
+			i_d++;
+			if (change)
+			i_d = 0;
+
 		}
-		else if (data[i_d] == '2' && check_opposite(data, i_d, '2')
-			&& ris[ft_adrr(0, i_d)] == '3' && ris[ft_adrr(2, i_d)] == '4')
-		{
- 			if (ris[ft_adrr(1, i_d)] != '1')
-			 {
-				printf ("r4\n");		
-				i_d = -1;
-			}
-			ris[ft_adrr(1, i_d)] = '1';
-		}
-		i_d++;
+		i++;
+		i_d = 0;
 	}
 	return (1);
 }
