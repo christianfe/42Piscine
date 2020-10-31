@@ -32,12 +32,10 @@ int	check_four(char *arr, int start, char to_find)
 
 int	check_opposite(char *arr, int n, char to_find) 
 {
-	printf("opp:%c\t", arr[n]);
 	if ((n >= 0 && n <= 3) || (n >= 8 && n <= 11))
 		n += 4;
 	else
 		n -= 4;
-	printf("opp:%c\t", arr[n]);
 	if (arr[n] == to_find)
 		return (1);
 	else
