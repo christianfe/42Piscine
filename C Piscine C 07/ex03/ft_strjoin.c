@@ -6,7 +6,7 @@
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:11:07 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/10/31 08:28:29 by cfelicio         ###   ########.fr       */
+/*   Updated: 2020/10/31 08:40:04 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 
 	if (size == 0)
 		return ((char *)malloc(sizeof(char)));
-	full_length = ft_compute_final_length(strs, size, ft_stren(sep));
+	full_length = ft_compute_final_length(strs, size, ft_strlen(sep));
 	if (!(string = (char *)malloc((full_length + 1) * sizeof(char))))
 		return (0);
 	read_head = string;
