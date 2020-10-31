@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void	ft_place_data(char *data, char *ris);
+
 void	ft_putstr(char *str)
 {
 	while (*str)
@@ -64,6 +66,7 @@ void	ft_putarr(char *arr)
 int		main(int argc, char **argv)
 {
 	char data[4][4];
+	char ris[4][4];
 
 	if (argc == 2)
 	{
@@ -73,6 +76,7 @@ int		main(int argc, char **argv)
 			return (0);
 		}
 		ft_putarr(&data[0][0]);
+		ft_place_data(data, ris);
 	}
 	else
 		ft_putstr("Error");
