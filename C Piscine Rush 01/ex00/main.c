@@ -45,7 +45,7 @@ int		ft_create_data(char *data, char *value)
 	return (1);
 }
 
-void 	ft_putarr(char *arr)
+void	ft_putarr(char *arr)
 {
 	int a;
 
@@ -55,8 +55,8 @@ void 	ft_putarr(char *arr)
 		write(1, (arr + a), 1);
 		a++;
 		if (a % 4 == 0)
-			write (1, "\n", 1);
-		else 
+			write(1, "\n", 1);
+		else
 			write(1, " ", 1);
 	}
 }
@@ -67,7 +67,7 @@ int		main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		if(!ft_create_data(&data[0][0], argv[1]))
+		if (!ft_create_data(&data[0][0], argv[1]))
 		{
 			ft_putstr("Error2\n");
 			return (0);
@@ -76,5 +76,5 @@ int		main(int argc, char **argv)
 	}
 	else
 		ft_putstr("Error");
-	return 0;
+	return (0);
 }
