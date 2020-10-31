@@ -14,7 +14,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	ft_place_data(char *data, char *ris);
+int		ft_place_data(char *data, char *ris);
+
+int	ft_strlen(char *str)
+{
+	char	*charptr;
+	int		i;
+
+	i = 0;
+	charptr = str;
+	while (*charptr != 0)
+	{
+		i++;
+		charptr++;
+	}
+	return (i);
+}
 
 void	ft_putstr(char *str)
 {
@@ -32,6 +47,8 @@ int		ft_create_data(char *data, char *value)
 
 	i = 0;
 	a = 0;
+	if (ft_strlen(value) != 31)
+		return (0);
 	while (i < 32)
 	{
 		if (*(value + i) >= '1' && *(value + i) <= '4')
@@ -44,8 +61,6 @@ int		ft_create_data(char *data, char *value)
 			return (0);
 		i++;
 	}
-	if (data[32] != 0)
-		return(0);
 	return (1);
 }
 
@@ -77,10 +92,16 @@ int		main(int argc, char **argv)
 			ft_putstr("Error\n");
 			return (0);
 		}
-		//ft_putarr(&data[0][0]);
-		if ... ft_place_data(&data[0][0], &ris[0][0]);
+		ft_putarr(&data[0][0]);
+		ft_putstr("\n");
+		if (!ft_place_data(&data[0][0], &ris[0][0]))
+		{
+			ft_putstr("Error2\n");
+			return (0);
+		}
+		ft_putarr(&ris[0][0]);
 	}
 	else
-		ft_putstr("Error");
+		ft_putstr("Error3\n");
 	return (0);
 }

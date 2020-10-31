@@ -10,23 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
 int	check_data(char *data);
+void	ft_putstr(char *str);
 
 int		ft_adrr(int space, int i)
 {
 	if (i <= 3 && i >= 0)
 		return (i + (4 * space));
 	else if (i <= 7 && i >= 4)
-		return (((i - 4) * 4) +(3 - space));
+		return ((i + 4) + (4 * (3 - space)));
 	else if (i <= 11 && i >= 8)
-		return ((11 - i) + (4 * (3 - space)));
-	else if (i <= 12 && i >= 15)
-		return (((15 - i) * 4 ) + space);
-}
-
-void	ft_add(int space, int i, char c)
-{
-
+		return ((i - 8) * 4 + space);
+	else
+		return ((12 - i) * 4 + (3 - space));
 }
 
 int		ft_place_data(char *data, char *ris)
@@ -41,13 +39,13 @@ int		ft_place_data(char *data, char *ris)
 	while (i_d < 16)
 	{
 		if (data[i_d] == '1')
-			ft_add(0, i_d, '4');
-		if (data[i_d] == '4')
+			ris[ft_adrr(0, i_d)] = '4';
+		else if (data[i_d] == '4')
 		{
-			ft_add(0, i_d, '1');
-			ft_add(1, i_d, '2');
-			ft_add(2, i_d, '3');
-			ft_add(3, i_d, '4');
+			ris[ft_adrr(0, i_d)] = '1';
+			ris[ft_adrr(1, i_d)] = '2';
+			ris[ft_adrr(2, i_d)] = '3';
+			ris[ft_adrr(3, i_d)] = '4';
 		}
 		i_d++;
 	}
