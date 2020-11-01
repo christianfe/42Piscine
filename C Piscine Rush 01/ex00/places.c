@@ -51,7 +51,7 @@ char	value_buco(char *ris,int i)
 		if (i <= 3 && i >= 0)
 			val_ris = ris[i + (4 * k)];
 		else
-			val_ris = ris[((8 - i) * 4) + k];
+			val_ris = ris[ft_adrr(k,i)];
 		
 		if (val_ris != 0)
 			vet[val_ris - '1'] = '1';
@@ -86,7 +86,10 @@ int	ft_check_colrow(char *data, int i)
 		vet[3] = data[i + 12];
 		numzero = check_zero(&vet[0]);
 		if (numzero >= 0)
-			data[i + (4 * numzero)] = value_buco(data, i);
+		{
+			if (data[ft_adrr(numzero,i)] == 0)
+				data[i + (4 * numzero)] = value_buco(data, i);
+		}
 		i++;
 		vet[0] = 0;
 		vet[1] = 0;
@@ -101,8 +104,11 @@ int	ft_check_colrow(char *data, int i)
 		vet[2] = data[((i - 8) * 4) + 2];
 		vet[3] = data[((i - 8) * 4) + 3];
 		numzero = check_zero(&vet[0]);
-		if (numzero == 0 || numzero == 1 ||numzero == 2 ||numzero == 3)
-			data[ft_adrr(numzero,i)] = value_buco(data, i);
+		if (numzero >= 0)
+		{
+			if (data[ft_adrr(numzero,i)] == 0)
+				data[ft_adrr(numzero,i)] = value_buco(data, i);
+		}
 		i++;
 		vet[0] = 0;
 		vet[1] = 0;

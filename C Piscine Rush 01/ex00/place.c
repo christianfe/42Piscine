@@ -197,7 +197,7 @@ printf("O\n");
 			ris[ft_adrr(2, i_d)] = '2';
 		}
 	
-		if (!ft_check_colrow(ris, i_d))	return (0);
+		 if (!ft_check_colrow(ris, i_d))	return (0);
 		
 		if (change == 1)
 			i_d = 0;
