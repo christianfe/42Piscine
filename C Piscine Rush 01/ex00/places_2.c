@@ -18,12 +18,12 @@ void	ft_find_left(char *ris, char replace)
 	int y[2];
 	int i;
 	int k;
-	
+
 	found = 0;
 	k = 0;
 	i = 0;
 	y[0] = 0;
-	while(k < 4)
+	while (k < 4)
 	{
 		while (i < 4)
 		{
@@ -34,13 +34,12 @@ void	ft_find_left(char *ris, char replace)
 		if (found == 0)
 			y[0] = k;
 		else
-			found = 0; 
+			found = 0;
 		i = 0;
 		k++;
 	}
-
 	k = 8;
-	while(k < 12)
+	while (k < 12)
 	{
 		while (i < 4)
 		{
@@ -51,11 +50,10 @@ void	ft_find_left(char *ris, char replace)
 		if (found == 0)
 			y[1] = k - 8;
 		else
-			found = 0; 
+			found = 0;
 		i = 0;
 		k++;
 	}
-
 	if (ris[ft_adrr(y[1], y[0])] == 0)
 		ris[ft_adrr(y[1], y[0])] = replace;
 }
@@ -86,7 +84,7 @@ int		check(char *ris, int row, char to_find)
 	}
 	if (left == 1 && row <= 4)
 	{
-		if(check(ris, 8, to_find) == 1)
+		if (check(ris, 8, to_find) == 1)
 			ft_find_left(ris, to_find);
 	}
 	else if (left == 1 && row > 4)
@@ -94,7 +92,7 @@ int		check(char *ris, int row, char to_find)
 	return (10);
 }
 
-int ft_check_char_left(char *ris)
+int		ft_check_char_left(char *ris)
 {
 	if (!check(ris, 0, '1'))
 		return (0);

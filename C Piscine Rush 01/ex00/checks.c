@@ -58,7 +58,8 @@ int		check_data(char *data)
 					return (0);
 			if ((i >= 0 && i <= 3) || (i >= 8 && i <= 11))
 			{
-				if((((data [i] - '0') + (data [i + 4] - '0')) < 3) || (((data [i] - '0') + (data [i + 4] - '0')) > 5))
+				if ((((data[i] - '0') + (data[i + 4] - '0')) < 3) ||
+				(((data[i] - '0') + (data[i + 4] - '0')) > 5))
 					return (0);
 			}
 		}
@@ -72,33 +73,19 @@ char	get_x(char *data, int i, int x, int type)
 	int punt;
 
 	if (i <= 3 && i >= 0)
-	{
 		punt = 12 + x;
-		if (type < 0)
-			punt -= 4;
-	}
 	if (i <= 7 && i >= 4)
-	{
 		punt = 8 + (3 - x);
-		if (type < 0)
-			punt -= 4;
-	}
 	if (i <= 11 && i >= 8)
-	{
 		punt = 4 + x;
-		if (type < 0)
-			punt -= 4;
-	}
 	if (i <= 15 && i >= 12)
-	{
 		punt = 4 + (3 - x);
-		if (type < 0)
-			punt -=4;
-	}
+	if (type < 0)
+		punt -= 4;
 	return (data[punt]);
 }
 
-int ft_arrc_comp(char *arr)
+int		ft_arrc_comp(char *arr)
 {
 	int i;
 

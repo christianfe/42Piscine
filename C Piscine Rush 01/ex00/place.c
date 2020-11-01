@@ -26,6 +26,7 @@ void	ft_place_6(char *data, char *ris, int i_d, int *change);
 void	ft_place_7(char *data, char *ris, int i_d, int *change);
 void	ft_place_8(char *data, char *ris, int i_d, int *change);
 void	ft_place_9(char *data, char *ris, int i_d, int *change);
+void	ft_place_10(char *data, char *ris, int i_d, int *change);
 
 int		ft_adrr(int space, int i)
 {
@@ -52,6 +53,7 @@ void	ft_place_data_0(char *data, char *ris, int i_d, int *change)
 	ft_place_7(data, ris, i_d, change);
 	ft_place_8(data, ris, i_d, change);
 	ft_place_9(data, ris, i_d, change);
+	ft_place_10(data, ris, i_d, change);
 }
 
 int		ft_place_data(char *data, char *ris)

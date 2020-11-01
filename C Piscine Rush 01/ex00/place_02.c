@@ -101,4 +101,26 @@ void	ft_place_9(char *data, char *ris, int i_d, int *change)
 		ris[ft_adrr(1, i_d)] = '3';
 		ris[ft_adrr(2, i_d)] = '1';
 	}
+	if (data[i_d] == 2 && check_opposite(data, i_d, '2') &&
+		ris[ft_adrr(0, i_d)] == '1' && ris[ft_adrr(1, i_d)] == '4' &&
+		ris[ft_adrr(3, i_d)] == 0 && ris[ft_adrr(2, i_d)] == 0)
+	{
+		if (ris[ft_adrr(3, i_d)] != '3' && ris[ft_adrr(2, i_d)] != '2')
+			*change = 1;
+		ris[ft_adrr(3, i_d)] = '3';
+		ris[ft_adrr(2, i_d)] = '2';
+	}
+}
+
+void	ft_place_10(char *data, char *ris, int i_d, int *change)
+{
+	if (data[i_d] == 2 && check_opposite(data, i_d, '2') &&
+		ris[ft_adrr(0, i_d)] == '2' && ris[ft_adrr(1, i_d)] == '4' &&
+		ris[ft_adrr(3, i_d)] == 0 && ris[ft_adrr(2, i_d)] == 0)
+	{
+		if (ris[ft_adrr(3, i_d)] != '3' && ris[ft_adrr(2, i_d)] != '1')
+			*change = 1;
+		ris[ft_adrr(3, i_d)] = '3';
+		ris[ft_adrr(2, i_d)] = '1';
+	}
 }
