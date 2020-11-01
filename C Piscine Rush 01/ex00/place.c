@@ -18,6 +18,7 @@ int		check_opposite(char *arr, int n, char to_find);
 void	ft_putstr(char *str);
 char	get_x(char *data, int i, int x, int type);
 int		ft_check_colrow(char *data,  int i);
+int ft_check_char_left(char *ris);
 
 int		ft_adrr(int space, int i)
 {
@@ -65,7 +66,7 @@ printf("B\n");
 			ris[ft_adrr(2, i_d)] = '3';
 			ris[ft_adrr(3, i_d)] = '4';
 		}
-		if (data[i_d] == '3' && check_opposite(data, i_d, '2'))
+	/*	if (data[i_d] == '3' && check_opposite(data, i_d, '2'))
 		{
 			if (ris[ft_adrr(2, i_d)] != '4')
 				{
@@ -74,7 +75,7 @@ printf("C\n");
 			}
 			ris[ft_adrr(2, i_d)] = '4';
 		}
-		/*if (data[i_d] == '2' && check_opposite(data, i_d, '2') && ris[ft_adrr(0, i_d)] == '3' && ris[ft_adrr(2, i_d)] == '4' && ris[ft_adrr(1, i_d)] == 0)
+	*/	/*if (data[i_d] == '2' && check_opposite(data, i_d, '2') && ris[ft_adrr(0, i_d)] == '3' && ris[ft_adrr(2, i_d)] == '4' && ris[ft_adrr(1, i_d)] == 0)
 		{
 			if (ris[ft_adrr(1, i_d)] != '1')
 				{
@@ -197,7 +198,8 @@ printf("O\n");
 			ris[ft_adrr(2, i_d)] = '2';
 		}
 	
-		 if (!ft_check_colrow(ris, i_d))	return (0);
+		if (!ft_check_colrow(ris, i_d))	return (0);
+		if (!ft_check_char_left(ris))	return (0);
 		
 		if (change == 1)
 			i_d = 0;
