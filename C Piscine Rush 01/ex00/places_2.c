@@ -14,17 +14,17 @@
 
 int		ft_adrr(int space, int i);
 
-void	ft_find_left(char *ris, char replace, int x)
+void	ft_find_left(char *ris, char replace)
 {
 	int found;
-	int y;
+	int y[2];
 	int i;
 	int k;
 	
 	found = 0;
 	k = 0;
 	i = 0;
-	y = 0;
+	y[0] = 0;
 	while(k < 4)
 	{
 		while (i < 4)
@@ -34,14 +34,32 @@ void	ft_find_left(char *ris, char replace, int x)
 			i++;
 		}
 		if (found == 0)
-			y = k;
+			y[0] = k;
 		else
 			found = 0; 
 		i = 0;
 		k++;
 	}
-	if (ris[ft_adrr(x, y)] == 0)
-		ris[ft_adrr(x, y)] = replace;
+
+	k = 8;
+	while(k < 12)
+	{
+		while (i < 4)
+		{
+			if (ris[ft_adrr(i, k)] == replace)
+				found = 1;
+			i++;
+		}
+		if (found == 0)
+			y[1] = k - 8;
+		else
+			found = 0; 
+		i = 0;
+		k++;
+	}
+
+	if (ris[ft_adrr(y[1], y[0])] == 0)
+		ris[ft_adrr(y[1], y[0])] = replace;
 }
 
 int		check(char *ris, int row, char to_find)
@@ -58,11 +76,13 @@ int		check(char *ris, int row, char to_find)
 		while (i < 4)
 		{
 			if (ris[ft_adrr(i, row)] == to_find)
+			{
 				left--;
-			printf("%i\t%i\t%i\t'%c'\n", left, i, row,ris[ft_adrr(i, row)]);
+				printf("%i\t%i\t%i\t'%c'\n", left, i, row,ris[ft_adrr(i, row)]);
+			}
 			i++;
 		}
-		if (row - left == 0 && x == 0)
+		if (row == 4 - left && x == 0)
 			x = row;
 		printf("\n");
 		i = 0;
@@ -72,26 +92,22 @@ int		check(char *ris, int row, char to_find)
 	if (left == 1 && row <= 4)
 	{
 		if(check(ris, 8, to_find) == 1)
-			ft_find_left(ris, to_find, x);
+			ft_find_left(ris, to_find);
 	}
 	else if (left == 1 && row > 4)
-		return (left);
-	return (1);
+		return (1);
+	return (10);
 }
 
 int ft_check_char_left(char *ris)
 {
-	int i;
-	char c;
-
-	i = 0;
-	c = '1';
-	while (i < 4)
-	{
-		if (!check(ris, 0, c))
-			return (0);
-		c++;
-		i++;
-	}
+	if (!check(ris, 0, '1'))
+		return (0);
+	if (!check(ris, 0, '2'))
+		return (0);
+	if (!check(ris, 0, '3'))
+		return (0);
+	if (!check(ris, 0, '4'))
+		return (0);
 	return (1);
 }
