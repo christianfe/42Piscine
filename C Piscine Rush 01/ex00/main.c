@@ -98,6 +98,7 @@ int		main(int argc, char **argv)
 			
 			return (0);
 		}
+		printf("\n@@@@@@@@@@@@\n");
 		ft_putarr(&ris[0][0]);
 	}
 	else
