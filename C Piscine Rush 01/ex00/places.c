@@ -46,9 +46,12 @@ char	value_buco(char *ris,int i)
 	k = 0;
 	while (k < 4)
 	{
-		val_ris = ris[i + (4 * k)];
+		if (i <= 3 && i >= 0)
+			val_ris = ris[i + (4 * k)];
+		else
+			val_ris = ris[((8 - i) * 4) + k];
 		
-		if (val_ris != 0 )
+		if (val_ris != 0)
 			vet[val_ris - '1'] = '1';
 		k++;
 	}
@@ -90,24 +93,26 @@ int	ft_check_colrow(char *data, int *change, int i)
 		vet[1] = 0;
 		vet[2] = 0;
 		vet[3] = 0;
-	}/*
-	if (i <= 12 && i >= 8 && *change == 1)
+	}
+	i = 8;
+	while (i <= 11 && i >= 8)
 	{
 		vet[0] = data[(i - 8) * 4];
 		vet[1] = data[((i - 8) * 4) + 1];
 		vet[2] = data[((i - 8) * 4) + 2];
 		vet[3] = data[((i - 8) * 4) + 3];
-		printf("Z:%i\t%i\n", check_zero(&vet[0]) ,i);
-		if (check_zero(&vet[0]) >= 0)
+		numzero = check_zero(&vet[0]);
+		if (numzero >= 0)
 		{
-			data[i + (4 * check_zero(&vet[0]))] = value_buco(data, i, check_zero(&vet[0]));
-			*change = 1;
+			data[(((i - 8) * 4) + numzero)] = value_buco(data, i);
+//			*change = 1;
+		printf("%i\t%i\n",i, (((i - 8) * 4) + numzero));
 		}
 		i++;
 		vet[0] = 0;
 		vet[1] = 0;
 		vet[2] = 0;
 		vet[3] = 0;
-	}*/
+	}
 	return (1);
 }
