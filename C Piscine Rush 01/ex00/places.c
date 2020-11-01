@@ -12,6 +12,8 @@
 
 #include <stdio.h>
 
+int		ft_adrr(int space, int i);
+
 int check_zero(char *vet)
 {
 	int i;
@@ -68,7 +70,7 @@ char	value_buco(char *ris,int i)
 		return (0);
 }
 
-int	ft_check_colrow(char *data, int *change, int i)
+int	ft_check_colrow(char *data, int i)
 {
 	char vet[4];
 	int numzero;
@@ -84,10 +86,7 @@ int	ft_check_colrow(char *data, int *change, int i)
 		vet[3] = data[i + 12];
 		numzero = check_zero(&vet[0]);
 		if (numzero >= 0)
-		{
 			data[i + (4 * numzero)] = value_buco(data, i);
-			*change = 1;
-		}
 		i++;
 		vet[0] = 0;
 		vet[1] = 0;
@@ -102,12 +101,8 @@ int	ft_check_colrow(char *data, int *change, int i)
 		vet[2] = data[((i - 8) * 4) + 2];
 		vet[3] = data[((i - 8) * 4) + 3];
 		numzero = check_zero(&vet[0]);
-		if (numzero >= 0)
-		{
-			data[(((i - 8) * 4) + numzero)] = value_buco(data, i);
-//			*change = 1;
-		printf("%i\t%i\n",i, (((i - 8) * 4) + numzero));
-		}
+		if (numzero == 0 || numzero == 1 ||numzero == 2 ||numzero == 3)
+			data[ft_adrr(numzero,i)] = value_buco(data, i);
 		i++;
 		vet[0] = 0;
 		vet[1] = 0;
