@@ -68,7 +68,7 @@ int		check(char *ris, int row, char to_find)
 		i = 0;
 		row++;
 	}
-	printf("#####\n");
+	printf("%i,%c#####\n", x, to_find);
 	if (left == 1 && row <= 4)
 	{
 		if(check(ris, 8, to_find) == 1)
