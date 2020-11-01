@@ -20,6 +20,11 @@ char	get_x(char *data, int i, int x, int type);
 int		ft_check_colrow(char *data,  int i);
 int		ft_check_char_left(char *ris);
 int		check_four(char *arr, int start, char to_find);
+void	ft_place_1(char *data, char *ris, int i_d, int *change);
+void	ft_place_2(char *data, char *ris, int i_d, int *change);
+void	ft_place_3(char *data, char *ris, int i_d, int *change);
+void	ft_place_4(char *data, char *ris, int i_d, int *change);
+void	ft_place_5(char *data, char *ris, int i_d, int *change);
 
 int		ft_adrr(int space, int i)
 {
@@ -46,121 +51,17 @@ int		ft_place_data(char *data, char *ris)
 		return (0);
 	while (i_d < 16)
 	{
-		if (data[i_d] == '1')
-		{
-			if (ris[ft_adrr(0, i_d)] != '4')
-			{
-printf("A%i\n",i_d);
-				change = 1;
-			}
-			ris[ft_adrr(0, i_d)] = '4';
-		}
-		if (data[i_d] == '4')
-		{
-			if (ris[ft_adrr(0, i_d)] != '1' && ris[ft_adrr(1, i_d)] != '2' && ris[ft_adrr(2, i_d)] != '3' && ris[ft_adrr(3, i_d)] != '4')
-			{
-				change = 1;
-printf("B%i\n",i_d);
-			}
-			ris[ft_adrr(0, i_d)] = '1';
-			ris[ft_adrr(1, i_d)] = '2';
-			ris[ft_adrr(2, i_d)] = '3';
-			ris[ft_adrr(3, i_d)] = '4';
-		}
-		if (data[i_d] == '3' && check_opposite(data, i_d, '2'))
-		{
-			if (ris[ft_adrr(2, i_d)] != '4')
-				{
-				change = 1;
-printf("C%i\n",i_d);
-			}
-			ris[ft_adrr(2, i_d)] = '4';
-		}
 		
-		if (data[i_d] == '3' && check_opposite(data, i_d, '1') && ris[ft_adrr(0, i_d)] == '1' && ris[ft_adrr(3, i_d)] == '4' && ris[ft_adrr(2, i_d)] == 0 && ris[ft_adrr(1, i_d)] == 0)
-		{
-			if (ris[ft_adrr(1, i_d)] != '3' && ris[ft_adrr(2, i_d)] != '2')
-				{
-				change = 1;
-printf("E%i\n",i_d);
-			}
-			ris[ft_adrr(1, i_d)] = '3';
-			ris[ft_adrr(2, i_d)] = '2';
-		}
+		ft_place_1(data, ris, i_d, &change);
+		ft_place_2(data, ris, i_d, &change);
+		ft_place_3(data, ris, i_d, &change);
+		ft_place_4(data, ris, i_d, &change);
+		ft_place_5(data, ris, i_d, &change);
+		
+		
+		
+		
 
-
-		if (data[i_d] == '3' && check_opposite(data, i_d, '2') && ris[ft_adrr(0, i_d)] == '2' && ris[ft_adrr(2, i_d)] == '4')
-		{
-			if (ris[ft_adrr(1, i_d)] != '3' && ris[ft_adrr(3, i_d)] != '1')
-			{
-				change = 1;
-printf("F%i\n",i_d);
-			}
-			ris[ft_adrr(1, i_d)] = '3';
-			ris[ft_adrr(3, i_d)] = '1';
-		}
-		if (data[i_d] == '2' && check_opposite(data, i_d, '2') && ris[ft_adrr(0, i_d)] == '3' && ris[ft_adrr(1, i_d)] == '4')
-		{
-			if (ris[ft_adrr(2, i_d)] != '1' && ris[ft_adrr(3, i_d)] != '2')
-				{
-				change = 1;
-printf("G%i\n",i_d);
-			}
-			ris[ft_adrr(2, i_d)] = '1';
-			ris[ft_adrr(3, i_d)] = '2';
-		}
-	
-	
-		if (data[i_d] == '3' && check_opposite(data, i_d, '2') && ris[ft_adrr(2, i_d)] == '4' && ris[ft_adrr(3, i_d)] == '2')
-		{
-			if (ris[ft_adrr(0, i_d)] != '1' && ris[ft_adrr(1, i_d)] != '3')
-				{
-				change = 1;
-printf("H%i\n",i_d);
-			}
-			ris[ft_adrr(0, i_d)] = '1';
-			ris[ft_adrr(1, i_d)] = '3';
-		}
-		if (data[i_d] == '2' && check_opposite(data, i_d, '3') && ris[ft_adrr(0, i_d)] == '3' && ris[ft_adrr(1, i_d)] == '4')
-		{
-			if (ris[ft_adrr(3, i_d)] != '1' && ris[ft_adrr(2, i_d)] != '2')
-			{
-				change = 1;
-printf("I%i\n",i_d);
-			}
-			ris[ft_adrr(3, i_d)] = '1';
-			ris[ft_adrr(2, i_d)] = '2';
-		}
-		if (data[i_d] == '3' && check_opposite(data, i_d, '1') && ris[ft_adrr(3, i_d)] == '4' && ris[ft_adrr(2, i_d)] == '1' && ris[ft_adrr(0, i_d)] == 0 && ris[ft_adrr(1, i_d)] == 0)
-		{
-			if (ris[ft_adrr(0, i_d)] != '2' && ris[ft_adrr(1, i_d)] != '3')
-				{
-				change = 1;
-printf("K%i\n",i_d);
-			}
-			ris[ft_adrr(0, i_d)] = '2';
-			ris[ft_adrr(1, i_d)] = '3';
-		}
-		if (data[i_d] == '3' && check_opposite(data, i_d, '1') && ris[ft_adrr(1, i_d)] == '1' && ris[ft_adrr(3, i_d)] == '4'  /*&& get_x(data, i_d, 2, 1) == '2' */&& ris[ft_adrr(0, i_d)] == 0 && ris[ft_adrr(2, i_d)] == 0)
-		{
-			if (ris[ft_adrr(0, i_d)] != '2' && ris[ft_adrr(2, i_d)] != '3')
-				{
-				change = 1;
-printf("M%i\n",i_d);
-			}
-			ris[ft_adrr(0, i_d)] = '2';
-			ris[ft_adrr(2, i_d)] = '3';
-		}
-
-		if (data[i_d] == '1' && check_opposite(data, i_d, '2') && ris[ft_adrr(0, i_d)] == '4')
-		{
-			if (ris[ft_adrr(3, i_d)] != '3')
-				{
-				change = 1;
-printf("N%i\n",i_d);
-			}
-			ris[ft_adrr(3, i_d)] = '3';
-		}
 		if ((i_d == 3 ||i_d == 15 || i_d == 11 || i_d == 7) && data[i_d] == '2' && check_opposite(data, i_d, '3') && ris[ft_adrr(1, i_d)] == '4' && ris[ft_adrr(3, i_d)] == '1' && get_x(data, i_d, 2, 1) == '3' && ris[ft_adrr(2, i_d)] == 0)
 		{
 			if (ris[ft_adrr(2, i_d)] != '2')

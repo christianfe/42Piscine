@@ -58,6 +58,11 @@ int		check_data(char *data)
 			if (data[i] == '4')
 				if (!(check_opposite(data, i, '1')))
 					return (0);
+			if ((i >= 0 && i <= 3) || (i >= 8 && i <= 11))
+			{
+				if((((data [i] - '0') + (data [i + 4] - '0')) < 3) || (((data [i] - '0') + (data [i + 4] - '0')) > 5))
+					return (0);
+			}
 		}
 		i++;
 	}
