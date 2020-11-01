@@ -189,6 +189,36 @@ printf("Q\n");
 			ris[ft_adrr(2, i_d)] = '3';
 			ris[ft_adrr(1, i_d)] = '1';
 		}
+		if (data[i_d] == '3' && check_opposite(data, i_d, '1') && ris[ft_adrr(2, i_d)] == '2' && ris[ft_adrr(3, i_d)] == '4' && ris[ft_adrr(0, i_d)] == 0 && ris[ft_adrr(1, i_d)] == 0)
+		{
+			if (ris[ft_adrr(0, i_d)] != '1' && ris[ft_adrr(1, i_d)] != '3')
+				{
+				change = 1;
+printf("R\n");
+			}
+			ris[ft_adrr(0, i_d)] = '1';
+			ris[ft_adrr(1, i_d)] = '3';
+		}
+		if (data[i_d] == '3' && check_opposite(data, i_d, '1') && ris[ft_adrr(2, i_d)] == '1' && ris[ft_adrr(3, i_d)] == '4' && ris[ft_adrr(0, i_d)] == 0 && ris[ft_adrr(1, i_d)] == 0)
+		{
+			if (ris[ft_adrr(0, i_d)] != '2' && ris[ft_adrr(1, i_d)] != '3')
+				{
+				change = 1;
+printf("S\n");
+			}
+			ris[ft_adrr(0, i_d)] = '2';
+			ris[ft_adrr(1, i_d)] = '3';
+		}
+		if (data[i_d] == '3' && check_opposite(data, i_d, '1') && ris[ft_adrr(2, i_d)] == '3' && ris[ft_adrr(3, i_d)] == '4' && ris[ft_adrr(0, i_d)] == 0 && ris[ft_adrr(1, i_d)] == 0)
+		{
+			if (ris[ft_adrr(0, i_d)] != '2' && ris[ft_adrr(1, i_d)] != '1')
+				{
+				change = 1;
+printf("T\n");
+			}
+			ris[ft_adrr(0, i_d)] = '2';
+			ris[ft_adrr(1, i_d)] = '1';
+		}
 	
 		if (!ft_check_colrow(ris, i_d))	return (0);
 		//if (!ft_check_char_left(ris))	return (0);
