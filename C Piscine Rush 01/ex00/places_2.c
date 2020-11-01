@@ -78,17 +78,14 @@ int		check(char *ris, int row, char to_find)
 			if (ris[ft_adrr(i, row)] == to_find)
 			{
 				left--;
-				printf("%i\t%i\t%i\t'%c'\n", left, i, row,ris[ft_adrr(i, row)]);
 			}
 			i++;
 		}
 		if (row == 4 - left && x == 0)
 			x = row;
-		printf("\n");
 		i = 0;
 		row++;
 	}
-	printf("%i,%c#####\n", x, to_find);
 	if (left == 1 && row <= 4)
 	{
 		if(check(ris, 8, to_find) == 1)
