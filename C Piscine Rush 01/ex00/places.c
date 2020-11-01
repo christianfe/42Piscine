@@ -19,12 +19,10 @@ int check_zero(char *vet)
 	
 	i = 0;
 	ris = -1;
-//	printf("0;;;%c,%c,%c,%c\n", vet[0], vet[1], vet[2], vet[3]);
 	while (i < 4)
 	{
 		if (*(vet + i) == 0)
 		{
-//			printf("Findzero:%i\t%i\n", i, *(vet + i));
 			if (ris == -1)
 				ris = i;
 			else
@@ -35,19 +33,26 @@ int check_zero(char *vet)
 	return (ris);
 }
 
-char	value_buco(int *array, int i, int pos)
+char	value_buco(char *ris,int i)
 {
-	int vet[4];
+	char vet[4];
 	int k;
+	char val_ris;
+	vet[0] = 0;
+	vet[1] = 0;
+	vet[2] = 0;
+	vet[3] = 0;
 
 	k = 0;
 	while (k < 4)
 	{
-		if ((array[i + (4 * pos)]) >= '1' )
-			vet[(array[i + (4 * pos)]) - '1'] = 1;
+		val_ris = ris[i + (4 * k)];
+		
+		if (val_ris != 0 )
+			vet[val_ris - '1'] = '1';
 		k++;
 	}
-	printf("0;;;%c,%c,%c,%c\n", array[0], array[1], array[2], array[3]);
+	
 	if (vet[0] == 0)
 		return ('1');
 	else if (vet[1] == 0)
@@ -69,17 +74,17 @@ int	ft_check_colrow(char *data, int *change, int i)
 
 	while (i <= 3 && i >= 0)
 	{
-		(void)change;
+		
 		vet[0] = data[i];
 		vet[1] = data[i + 4];
 		vet[2] = data[i + 8];
 		vet[3] = data[i + 12];
-		
-		printf("\n\n%i\t%c,%c,%c,%c\t%c,%c,%c,%c\n", i,vet[0], vet[1], vet[2], vet[3], data[i],data[i+4],data[i+8],data[i +12]);
 		numzero = check_zero(&vet[0]);
-		/*if (numzero >= 0)
-			data[i + (4 * numzero)] = value_buco(data, i, numzero);
-	*/	printf("\t%i\t%i\t%c\n", numzero, i, value_buco(&vet[0], i, numzero));
+		if (numzero >= 0)
+		{
+			data[i + (4 * numzero)] = value_buco(data, i);
+			*change = 1;
+		}
 		i++;
 		vet[0] = 0;
 		vet[1] = 0;
