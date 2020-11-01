@@ -52,17 +52,18 @@ int		check(char *ris, int row, char to_find)
 
 	i = 0;
 	left = 4;
+	x = 0;
 	while ((row < 4 && row >= 0) || (row > 7 && row < 12))
 	{
 		while (i < 4)
 		{
 			if (ris[ft_adrr(i, row)] == to_find)
 				left--;
-			else
-				x = row; 
 			printf("%i\t%i\t%i\t'%c'\n", left, i, row,ris[ft_adrr(i, row)]);
 			i++;
 		}
+		if (row - left == 0 && x == 0)
+			x = row;
 		printf("\n");
 		i = 0;
 		row++;
