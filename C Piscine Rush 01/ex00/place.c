@@ -161,7 +161,7 @@ printf("N\n");
 			}
 			ris[ft_adrr(3, i_d)] = '3';
 		}
-		if (data[i_d] == '2' && check_opposite(data, i_d, '3') && ris[ft_adrr(1, i_d)] == '4' && ris[ft_adrr(3, i_d)] == '1' && get_x(data, i_d, 2, 1) == '3')
+		if (data[i_d] == '2' && check_opposite(data, i_d, '3') && ris[ft_adrr(1, i_d)] == '4' && ris[ft_adrr(3, i_d)] == '1' && get_x(data, i_d, 2, 1) == '3' && ris[ft_adrr(2, i_d)] == 0)
 		{
 			if (ris[ft_adrr(2, i_d)] != '2')
 				{
@@ -181,7 +181,7 @@ printf("P\n");
 		}
 	
 		if (!ft_check_colrow(ris, i_d))	return (0);
-		if (!ft_check_char_left(ris))	return (0);
+		//if (!ft_check_char_left(ris))	return (0);
 		
 		if (change == 1)
 			i_d = 0;

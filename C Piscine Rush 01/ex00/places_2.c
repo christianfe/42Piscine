@@ -40,7 +40,7 @@ void	ft_find_left(char *ris, char replace, int x)
 		i = 0;
 		k++;
 	}
-	ris[ft_adrr(x - 1, y)] = replace;
+	ris[ft_adrr(x, y)] = replace;
 }
 
 int		check(char *ris, int row, char to_find)
@@ -51,7 +51,6 @@ int		check(char *ris, int row, char to_find)
 
 	i = 0;
 	left = 4;
-	x = 0;
 	while ((row < 4 && row >= 0) || (row > 7 && row < 12))
 	{
 		while (i < 4)
@@ -65,12 +64,11 @@ int		check(char *ris, int row, char to_find)
 		i = 0;
 		row++;
 	}
-	//printf ("%i,\t%i,  %c\n", left, row, to_find);
+	printf("%i\t%i\n", left, i);
 	if (left == 1 && row <= 4)
 	{
 		if(check(ris, 8, to_find) == 1)
 			ft_find_left(ris, to_find, x);
-		//printf("::%i", check(ris, 8, to_find));
 	}
 	else if (left == 1 && row > 4)
 		return (left);
