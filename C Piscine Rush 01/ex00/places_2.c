@@ -12,47 +12,49 @@
 
 int		ft_adrr(int space, int i);
 
+void	ft_find_left_2(char *ris, char replace, int *y)
+{
+	while (y[3] < 4)
+	{
+		while (y[4] < 4)
+		{
+			if (ris[ft_adrr(y[4], y[3])] == replace)
+				y[2] = 1;
+			y[4]++;
+		}
+		if (y[2] == 0)
+			y[0] = y[3];
+		else
+			y[2] = 0;
+		y[4] = 0;
+		y[3]++;
+	}
+}
+
 void	ft_find_left(char *ris, char replace)
 {
-	int found;
-	int y[2];
-	int i;
-	int k;
+	int y[5];
 
-	found = 0;
-	k = 0;
-	i = 0;
+	y[2] = 0;
+	y[3] = 0;
+	y[4] = 0;
 	y[0] = 0;
-	while (k < 4)
+	ft_find_left_2(ris, replace, &y[0]);
+	y[3] = 8;
+	while (y[3] < 12)
 	{
-		while (i < 4)
+		while (y[4] < 4)
 		{
-			if (ris[ft_adrr(i, k)] == replace)
-				found = 1;
-			i++;
+			if (ris[ft_adrr(y[4], y[3])] == replace)
+				y[2] = 1;
+			y[4]++;
 		}
-		if (found == 0)
-			y[0] = k;
+		if (y[2] == 0)
+			y[1] = y[3] - 8;
 		else
-			found = 0;
-		i = 0;
-		k++;
-	}
-	k = 8;
-	while (k < 12)
-	{
-		while (i < 4)
-		{
-			if (ris[ft_adrr(i, k)] == replace)
-				found = 1;
-			i++;
-		}
-		if (found == 0)
-			y[1] = k - 8;
-		else
-			found = 0;
-		i = 0;
-		k++;
+			y[2] = 0;
+		y[4] = 0;
+		y[3]++;
 	}
 	if (ris[ft_adrr(y[1], y[0])] == 0)
 		ris[ft_adrr(y[1], y[0])] = replace;
@@ -60,34 +62,29 @@ void	ft_find_left(char *ris, char replace)
 
 int		check(char *ris, int row, char to_find)
 {
-	int left;
-	int i;
-	int x;
+	int x[3];
 
-	i = 0;
-	left = 4;
-	x = 0;
+	x[2] = 0;
+	x[1] = 4;
+	x[0] = 0;
 	while ((row < 4 && row >= 0) || (row > 7 && row < 12))
 	{
-		while (i < 4)
+		while (x[2] < 4)
 		{
-			if (ris[ft_adrr(i, row)] == to_find)
-			{
-				left--;
-			}
-			i++;
+			if (ris[ft_adrr(x[2], row)] == to_find)
+				x[1]--;
+			x[2]++;
 		}
-		if (row == 4 - left && x == 0)
-			x = row;
-		i = 0;
+		if (row == 4 - x[1] && x[0] == 0)
+			x[0] = row;
 		row++;
 	}
-	if (left == 1 && row <= 4)
+	if (x[1] == 1 && row <= 4)
 	{
 		if (check(ris, 8, to_find) == 1)
 			ft_find_left(ris, to_find);
 	}
-	else if (left == 1 && row > 4)
+	else if (x[1] == 1 && row > 4)
 		return (1);
 	return (10);
 }
