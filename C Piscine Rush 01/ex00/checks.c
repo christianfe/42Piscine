@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 void	ft_putstr(char *str);
 
 int		check_four(char *arr, int start, char to_find)
@@ -98,4 +96,18 @@ char	get_x(char *data, int i, int x, int type)
 			punt -=4;
 	}
 	return (data[punt]);
+}
+
+int ft_arrc_comp(char *arr)
+{
+	int i;
+
+	i = 0;
+	while (i <= 16)
+	{
+		if (arr[i] == 0)
+			return (0);
+		i++;
+	}
+	return (1);
 }

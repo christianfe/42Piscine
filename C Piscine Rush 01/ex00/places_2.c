@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdio.h>
-
 int		ft_adrr(int space, int i);
 
 void	ft_find_left(char *ris, char replace)

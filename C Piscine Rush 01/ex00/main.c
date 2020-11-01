@@ -11,10 +11,9 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 int		ft_place_data(char *data, char *ris);
+int		ft_arrc_comp(char *arr);
 
 int		ft_strlen(char *str)
 {
@@ -76,7 +75,7 @@ void	ft_putarr(char *arr)
 		if (a % 4 == 0)
 			write(1, "\n", 1);
 		else
-			write(1, "\t", 1);
+			write(1, " ", 1);
 	}
 }
 
@@ -94,14 +93,15 @@ int		main(int argc, char **argv)
 		}
 		if (!ft_place_data(&data[0][0], &ris[0][0]))
 		{
-			ft_putstr("Error2\n");
-			
+			ft_putstr("Error\n");
 			return (0);
 		}
-		printf("\n@@@@@@@@@@@@\n");
-		ft_putarr(&ris[0][0]);
+		if (ft_arrc_comp(&ris[0][0]))
+			ft_putarr(&ris[0][0]);
+		else
+			ft_putstr("Error\n");
 	}
 	else
-		ft_putstr("Error3\n");
+		ft_putstr("Error\n");
 	return (0);
 }
