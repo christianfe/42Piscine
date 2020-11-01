@@ -68,7 +68,7 @@ int		check(char *ris, int row, char to_find)
 	{
 		if(check(ris, 8, to_find) == 1)
 			ft_find_left(ris, to_find, x);
-		printf("%i", check(ris, 8, to_find));
+		printf("::%i", check(ris, 8, to_find));
 	}
 	else if (left == 1 && row > 4)
 		return (left);
