@@ -24,7 +24,7 @@ typedef int	t_bool;
 # define EVEN_MSG "I have an even number of arguments.\n"
 # define ODD_MSG "I have an odd number of arguments.\n"
 
-int even(int number)
+int	even(int number)
 {
 	return (number % 2 == 0);
 }
