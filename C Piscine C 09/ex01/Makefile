@@ -10,20 +10,17 @@ ${NAME}:
 			ar rc ${NAME} ${OBJS}
 			ranlib ${NAME}
 
-.c.o:
+.c.o:		${OBJS}
 			gcc ${CFLAGS} -I includes -c $< -o ${<:.c=.o}
 
 clean:
 			rm -f ${OBJS}
 
-fclean:
-			clean
+fclean:		clean
 			rm -f ${NAME}
 
-re:
-			fclean all
+re:			fclean all
 
-all:
-			${NAME}
+all:		${NAME}
 
 .PHONY:		${NAME} clean fclean re .c.o all
