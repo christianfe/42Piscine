@@ -36,11 +36,13 @@ void	ft_putnbr_base(int nbr, char *base, char *dest)
 	unsigned int	un_nbr;
 	unsigned int	base_l;
 	unsigned int	i;
+	int				sign;
 
 	i = 0;
+	sign = 1;
 	if (nbr < 0)
 	{
-		*dest = '-';
+		sign = -1;
 		i++;
 		un_nbr = (unsigned int)(-1 * nbr);
 	}
@@ -53,5 +55,10 @@ void	ft_putnbr_base(int nbr, char *base, char *dest)
 		un_nbr = un_nbr / base_l;
 		i++;
 	}
-	ft_reverse_str(dest, i);
+	if (sign < 0)
+	{
+		dest[i] = '-';
+		i++;
+	}
+	ft_reverse_str(dest, i);		
 }

@@ -97,7 +97,9 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	i = 0;
 	if (!(ft_check_base(base_from) && ft_check_base(base_to)))
 		return (0);
-	while (*(nbr + i) == ' ')
+	while (*(nbr + i) == ' ' || *(nbr + i) == '\f' ||
+			*(nbr + i) == '\n' || *(nbr + i) == '\r' ||
+			*(nbr + i) == '\t' || *(nbr + i) == '\v')
 		i++;
 	while (*(nbr + i) == '+' || *(nbr + i) == '-')
 		i++;
