@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_show_tab.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/03 09:01:39 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/03 09:01:41 by cfelicio         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "ft_stock_str.h"
 
@@ -17,7 +29,7 @@ void	ft_putnbr(int n)
 	write(1, &"0123456789"[n % 10], 1);
 }
 
-void ft_show_tab(struct s_stock_str *par)
+void	ft_show_tab(struct s_stock_str *par)
 {
 	int i;
 

@@ -109,10 +109,10 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	}
 	i = 0;
 	nb = ft_atoi_base(nbr, base_from);
-	dest = (char *)malloc(ft_strlen(base_from) * ft_strlen(base_to) * sizeof(char) );
+	dest = (char *)malloc(100 * sizeof(char));
 	ft_putnbr_base(nb, base_to, dest);
 	while (ft_char_is_in_base((dest + i), base_to))
 		i++;
-	*(dest + i) = 0;
+	*(dest + 1 + ft_strlen(dest)) = 0;
 	return (dest);
 }

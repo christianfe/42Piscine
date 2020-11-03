@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strs_to_tab.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/03 09:01:25 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/03 09:01:29 by cfelicio         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "ft_stock_str.h"
 
-int	ft_strlen(char *str)
+int					ft_strlen(char *str)
 {
 	char	*charptr;
 	int		i;
@@ -16,11 +28,12 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strdup(char *str)
+char				*ft_strdup(char *str)
 {
 	int		i;
 	char	*dest;
-	
+
+	i = 0;
 	dest = (char *)malloc(ft_strlen(str) * sizeof(char) + 1);
 	if (dest == NULL)
 		return (NULL);
@@ -35,7 +48,7 @@ char	*ft_strdup(char *str)
 
 struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 {
-	int	i;
+	int					i;
 	struct s_stock_str	*array;
 
 	i = 0;
