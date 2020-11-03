@@ -17,7 +17,7 @@ void	ft_display_file(char *path)
 	close (file_des);
 }
 
-int		main(int argc, int **argv)
+int		main(int argc, char **argv)
 {
 	if (argc == 1)
 		write(2, "File name missing.\n", 19);
