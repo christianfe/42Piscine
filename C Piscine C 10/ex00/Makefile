@@ -6,13 +6,11 @@ SRCS		= ft_display_file.c
 
 OUT			= ft_display_file
 
-all:
-			${OBJS}
-			gcc -Wall -Werror -Wextra -c $< -o ${<:.c=.o}
+all:		${OBJS}
+			gcc -Wall -Werror -Wextra -o ${OUT} ${OBJS}
 
 clean:
 			rm -f ${OBJS}
 
-fclean:
-			clean
-			rm -f ${NAME}
+fclean:		clean
+			rm -f ${OUT}
