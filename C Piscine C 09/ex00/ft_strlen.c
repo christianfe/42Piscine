@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.h                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/03 09:00:50 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/11/03 09:00:53 by cfelicio         ###   ########.fr       */
+/*   Created: 2020/11/03 10:55:04 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/03 10:55:06 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ABS_H
-# define FT_ABS_H
+int	ft_strlen(char *str)
+{
+	char	*charptr;
+	int		i;
 
-# define ABS(x)
-
-#endif
+	i = 0;
+	charptr = str;
+	while (*charptr != 0)
+	{
+		i++;
+		charptr++;
+	}
+	return (i);
+}
