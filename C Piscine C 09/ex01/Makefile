@@ -6,14 +6,18 @@ CFLAGS	= -Wall -Wextra -Werror
 
 NAME	= libft.a
 
-${NAME}:	ar rc ${NAME} ${OBJS}
+${NAME}:
+			ar rc ${NAME} ${OBJS}
 			ranlib ${NAME}
 
-.c.o:		gcc ${CFLAGS} -I includes -c
+.c.o:
+			gcc ${CFLAGS} -I includes -c $< -o ${<:.c=.o}
 
-clean:		rm -f ${OBJS}
+clean:
+			rm -f ${OBJS}
 
-fclean:		clean
+fclean:
+			clean
 			rm -f ${NAME}
 
 re:
@@ -22,4 +26,4 @@ re:
 all:
 			${NAME}
 
-.PHONY = ${NAME}
+.PHONY:		${NAME} clean fclean re .c.o all
