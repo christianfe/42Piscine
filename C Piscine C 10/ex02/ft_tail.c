@@ -17,26 +17,6 @@ char	*g_buf;
 int		g_fd;
 int		g_buffer_size;
 
-void	ft_putstr(char *str)
-{
-	while (*str)
-	{
-		write(1, str, 1);
-		str++;
-	}
-}
-
-void	ft_print_error_msg(char *file)
-{
-	ft_putstr(basename(g_name_progr));
-	ft_putstr(": ");
-	ft_putstr(file);
-	ft_putstr(": ");
-	ft_putstr(strerror(errno));
-	ft_putstr("\n");
-	errno = 0;
-}
-
 int	ft_atoi(char *str)
 {
 	int ris;
