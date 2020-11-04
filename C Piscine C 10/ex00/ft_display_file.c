@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_display_file.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/04 11:59:18 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/04 11:59:20 by cfelicio         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <fcntl.h>
 
@@ -14,7 +26,7 @@ void	ft_display_file(char *path)
 	}
 	while (read(file_des, &curchar, 1))
 		write(1, &curchar, 1);
-	close (file_des);
+	close(file_des);
 }
 
 int		main(int argc, char **argv)

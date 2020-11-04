@@ -6,11 +6,11 @@ CFLAGS	= -Wall -Wextra -Werror
 
 NAME	= libft.a
 
-${NAME}:
+${NAME}:	${OBJS}
 			ar rc ${NAME} ${OBJS}
 			ranlib ${NAME}
 
-.c.o:		${OBJS}
+.c.o:		
 			gcc ${CFLAGS} -I includes -c $< -o ${<:.c=.o}
 
 clean:
