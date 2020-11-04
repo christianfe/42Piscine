@@ -10,57 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 
-int		ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while (*(str + i))
-		i++;
-	return (i);
-}
-
+int		ft_strlen(char *str);
 
 void	ft_reverse_str(char *str, int size)
 {
-	int		len;
 	int		i;
 	char	temp;
 
-	len = ft_strlen(str);
 	i = 0;
-	while (i < len / 2)
+	size--;
+	while (i < size)
 	{
-		temp = str[i + size];
-		str[i + size] = str[len - i - 1];
-		str[len - i - 1] = temp;
+		temp = str[i];
+		str[i] = str[size];
+		str[size] = temp;
+		size--;
 		i++;
 	}
 }
 
 void	ft_putnbr_base(int nbr, char *base, char *dest)
 {
-	unsigned int	lenbase;
-	unsigned int	nbr_unsigned;
-	int				i;
+	unsigned int	ui[2];
+	unsigned int	i;
+	int				sign;
 
 	i = 0;
+	sign = 1;
 	if (nbr < 0)
 	{
-		dest[i++] = '-';
-		nbr_unsigned = (unsigned int)(-1 * nbr);
+		sign = -1;
+		i++;
 	}
-	else
-		nbr_unsigned = (unsigned int)nbr;
-	lenbase = ft_strlen(base);
-	if (nbr_unsigned == 0)
-		dest[i++] = *(base);
-	while (nbr_unsigned > 0)
+	ui[0] = (unsigned int)(nbr * sign);
+	ui[1] = ft_strlen(base);
+	while (ui[0] != 0)
 	{
-		dest[i++] = *(base + (nbr_unsigned % lenbase));
-		nbr_unsigned /= lenbase;
+		dest[i] = base[ui[0] % ui[1]];
+		ui[0] = ui[0] / ui[1];
+		i++;
 	}
-	dest[i] = 0;
-	(nbr < 0) ? strev(dest, 1) : strev(dest, 0);
+	if (sign < 0)
+	{
+		dest[i] = '-';
+		i++;
+	}
+	ft_reverse_str(dest, i);
 }

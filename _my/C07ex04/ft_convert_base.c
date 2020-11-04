@@ -10,43 +10,53 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strlen(char *str);
+#include <stdlib.h>
 
-void	ft_putnbr_base(int nbr, char *base, char *nb_dest);
+void	ft_putnbr_base(int nbr, char *base, char *dest);
 
 int		ft_check_base(char *base)
 {
-	char	*checkbase;
-	int		i;
+	int k;
+	int i;
 
-	checkbase = base;
+	i = 0;
+	k = 1;
 	if (*base == 0 || *(base + 1) == 0)
 		return (0);
-	while (*checkbase)
+	while (*(base + i))
 	{
-		if (*checkbase == '+' || *checkbase == '-'
-			|| *checkbase == ' ' || *checkbase <= 31)
+		if (*(base + i) == '+' || *(base + i) == '-' || *(base + i) == ' ')
 			return (0);
-		i = 1;
-		while (*(checkbase + i))
+		while (*(base + k))
 		{
-			if (*(checkbase + i) == *checkbase)
+			if (*(base + i) == *(base + k))
 				return (0);
-			i++;
+			k++;
 		}
-		checkbase++;
+		i++;
+		k = i + 1;
 	}
 	return (1);
 }
 
-char	*ft_char_is_in_base(char *base, char *to_find)
+int		ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (*(str + i))
+		i++;
+	return (i);
+}
+
+char	*ft_char_is_in_base(char *str, char *base)
 {
 	int i;
 
 	i = 0;
 	while (base[i])
 	{
-		if (*to_find == base[i])
+		if (*str == base[i])
 			return (base + i);
 		i++;
 	}
@@ -56,38 +66,51 @@ char	*ft_char_is_in_base(char *base, char *to_find)
 int		ft_atoi_base(char *str, char *base)
 {
 	unsigned int	ris;
-	int				sign;
-	char			*charptr;
+	unsigned int	sign;
 
 	ris = 0;
 	sign = 1;
-	charptr = str;
-	while (*charptr == ' ' || (*charptr >= 9 && *charptr <= 13))
-		charptr++;
-	while (*charptr == '-' || *charptr == '+')
+	while (*str == ' ' || *str == '\f' || *str == '\n' ||
+			*str == '\r' || *str == '\t' || *str == '\v')
+		str++;
+	while (*str == '+' || *str == '-')
 	{
-		if (*charptr == '-')
+		if (*str == '-')
 			sign *= -1;
-		charptr++;
+		str++;
 	}
-	while (ft_char_is_in_base(base, charptr))
+	while (ft_char_is_in_base(str, base))
 	{
 		ris *= ft_strlen(base);
-		ris += (unsigned int)(ft_char_is_in_base(base, charptr) - base);
-		charptr++;
+		ris += (unsigned int)(ft_char_is_in_base(str, base) - base);
+		str++;
 	}
-	return (int)(ris * sign);
+	return (ris * sign);
 }
 
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
-	int		nb_int;
-	char	*nb;
+	int		nb;
+	char	*dest;
+	int		i;
 
+	i = 0;
 	if (!(ft_check_base(base_from) && ft_check_base(base_to)))
 		return (0);
-	nb = malloc(34);
-	nb_int = ft_atoi_base(nbr, base_from);
-	ft_encodenbr_base(nb_int, base_to, nb);
-	return (nb);
+	while (*(nbr + i) == ' ' || *(nbr + i) == '\f' || *(nbr + i) == '\n' ||
+		*(nbr + i) == '\r' || *(nbr + i) == '\t' || *(nbr + i) == '\v')
+		i++;
+	while (*(nbr + i) == '+' || *(nbr + i) == '-')
+		i++;
+	while (++i < ft_strlen(nbr))
+		if (!ft_char_is_in_base((nbr + i), base_from))
+			return (0);
+	i = 0;
+	nb = ft_atoi_base(nbr, base_from);
+	dest = (char *)malloc(100 * sizeof(char));
+	ft_putnbr_base(nb, base_to, dest);
+	while (ft_char_is_in_base((dest + i), base_to))
+		i++;
+	*(dest + 1 + ft_strlen(dest)) = 0;
+	return (dest);
 }
