@@ -12,30 +12,68 @@
 
 #include <unistd.h>
 #include <fcntl.h>
+#include <string.h>
+#include <libgen.h>
+#include <errno.h>
 
-void	ft_cat(char *path)
+char	*g_name_progr;
+
+void	ft_putstr(char *str)
 {
-	int		file_des;
+	while (*str)
+	{
+		write(1, str, 1);
+		str++;
+	}
+}
+
+void	ft_print_error_msg(char *file)
+{
+	ft_putstr(basename(g_name_progr));
+	ft_putstr(": ");
+	ft_putstr(file);
+	ft_putstr(": ");
+	ft_putstr(strerror(errno));
+	ft_putstr("\n");
+	errno = 0;
+}
+
+void	ft_display_file(int fd, char *path)
+{
 	char	curchar;
 
-	file_des = open(path, O_RDONLY);
-	if (file_des == -1)
+	while (read(fd, &curchar, 1))
 	{
-		write(2, "Cannot read file.\n", 18);
-		return ;
-	}
-	while (read(file_des, &curchar, 1))
+		if (errno)
+		{
+			ft_print_error_msg(path);
+			return ;
+		}
 		write(1, &curchar, 1);
-	close(file_des);
+	}
 }
 
 int		main(int argc, char **argv)
 {
+	int	fd;
+	int	i;
+
+	g_name_progr = argv[0];
 	if (argc == 1)
-		write(2, "File name missing.\n", 19);
-	else if (argc == 2)
-		ft_cat(argv[1]);
+		ft_display_file(0, 0);
 	else
-		write(2, "Too many arguments.\n", 20);
+	{
+		i = 0;
+		while (++i < argc)
+		{
+			if ((fd = open(argv[i], O_RDONLY)) == -1)
+			{
+				ft_print_error_msg(argv[i]);
+				continue ;
+			}
+			ft_display_file(fd, argv[i]);
+			close(fd);
+		}
+	}
 	return (0);
 }

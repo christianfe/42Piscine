@@ -12,12 +12,10 @@
 
 void	ft_putchar(char c);
 
-void	top_bottom_line(int *xx)
+void	top_bottom_line(int x)
 {
 	int i;
-	int x;
-
-	x = *xx;
+	
 	i = 0;
 	ft_putchar('A');
 	if (x >= 3)
@@ -30,17 +28,13 @@ void	top_bottom_line(int *xx)
 		ft_putchar('C');
 }
 
-void	middles_lines(int *xx, int *yy)
+void	middles_lines(int x, int y)
 {
 	int i;
 	int k;
-	int x;
-	int y;
-
+	
 	i = 0;
 	k = 0;
-	x = *xx;
-	y = *yy;
 	while (k < (y - 2))
 	{
 		while (i < x)
@@ -61,13 +55,13 @@ void	rush(int x, int y)
 {
 	if (y > 0 && x > 0)
 	{
-		top_bottom_line(&x);
+		top_bottom_line(x);
 		ft_putchar('\n');
 		if (y > 2)
-			middles_lines(&x, &y);
+			middles_lines(x, y);
 		if (y > 1)
 		{
-			top_bottom_line(&x);
+			top_bottom_line(x);
 			ft_putchar('\n');
 		}
 	}

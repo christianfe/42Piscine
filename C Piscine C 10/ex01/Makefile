@@ -7,7 +7,7 @@ SRCS		= ft_cat.c
 OUT			= ft_cat
 
 all:		${OBJS}
-			gcc -Wall -Werror -Wextra -o ${OUT} ${OBJS}
+			gcc -Wall -Werror -Wextra ${NAME} -o ${OUT}
 			rm ${OBJS}
 
 clean:
@@ -16,4 +16,4 @@ clean:
 fclean:		clean
 			rm -f ${OUT}
 
-.PHONY:		clean fclean all
+.PHONY:		all clean fclean
