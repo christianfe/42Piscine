@@ -33,8 +33,7 @@ void	ft_reverse_str(char *str, int size)
 
 void	ft_putnbr_base(int nbr, char *base, char *dest)
 {
-	unsigned int	un_nbr;
-	unsigned int	base_l;
+	unsigned int	ui[2];
 	unsigned int	i;
 	int				sign;
 
@@ -44,15 +43,13 @@ void	ft_putnbr_base(int nbr, char *base, char *dest)
 	{
 		sign = -1;
 		i++;
-		un_nbr = (unsigned int)(-1 * nbr);
 	}
-	else
-		un_nbr = (unsigned int)nbr;
-	base_l = ft_strlen(base);
-	while (un_nbr != 0)
+	ui[0] = (unsigned int)(nbr * sign);
+	ui[1] = ft_strlen(base);
+	while (ui[0] != 0)
 	{
-		dest[i] = base[un_nbr % base_l];
-		un_nbr = un_nbr / base_l;
+		dest[i] = base[ui[0] % ui[1]];
+		ui[0] = ui[0] / ui[1];
 		i++;
 	}
 	if (sign < 0)
@@ -60,5 +57,5 @@ void	ft_putnbr_base(int nbr, char *base, char *dest)
 		dest[i] = '-';
 		i++;
 	}
-	ft_reverse_str(dest, i);		
+	ft_reverse_str(dest, i);
 }
