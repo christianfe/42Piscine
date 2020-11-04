@@ -17,6 +17,7 @@
 #include <errno.h>
 
 char	*g_name_progr;
+char	*g_size;
 
 void	ft_putstr(char *str)
 {
@@ -59,7 +60,8 @@ int		main(int argc, char **argv)
 	int	i;
 
 	g_name_progr = argv[0];
-	if (argc == 1)
+	g_size = argv[1];
+	if (argc <= 3)
 		ft_display_file(0, 0);
 	else
 	{
