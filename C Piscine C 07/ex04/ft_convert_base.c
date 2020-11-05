@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 int		ft_strlen(char *str);
 
 void	ft_putnbr_base(int nbr, char *base, char *nb_dest);
@@ -88,6 +90,6 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 		return (0);
 	nb = malloc(34);
 	nb_int = ft_atoi_base(nbr, base_from);
-	ft_encodenbr_base(nb_int, base_to, nb);
+	ft_putnbr_base(nb_int, base_to, nb);
 	return (nb);
 }

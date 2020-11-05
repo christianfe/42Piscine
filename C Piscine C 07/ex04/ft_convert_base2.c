@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 int		ft_strlen(char *str)
 {
 	int i;
@@ -20,7 +19,6 @@ int		ft_strlen(char *str)
 		i++;
 	return (i);
 }
-
 
 void	ft_reverse_str(char *str, int size)
 {
@@ -62,5 +60,8 @@ void	ft_putnbr_base(int nbr, char *base, char *dest)
 		nbr_unsigned /= lenbase;
 	}
 	dest[i] = 0;
-	(nbr < 0) ? strev(dest, 1) : strev(dest, 0);
+	if (nbr < 0)
+		ft_reverse_str(dest, 1);
+	else
+		ft_reverse_str(dest, 0);
 }
