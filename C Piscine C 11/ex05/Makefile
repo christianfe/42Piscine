@@ -1,13 +1,11 @@
-NAME		= do-op.c
-
 OBJS		= ${SRCS:.c=.o}
 
-SRCS		= fd-op.c
+SRCS		= do_op.c
 
 OUT			= do-op
 
 all:		
-			gcc -Wall -Werror -Wextra ${NAME} -o ${OUT}
+			gcc -Wall -Werror -Wextra ${SRCS} -o ${OUT}
 
 clean:
 			rm -f ${OBJS}

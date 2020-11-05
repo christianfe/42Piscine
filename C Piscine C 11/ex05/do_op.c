@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   do-op.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/05 14:10:29 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/05 14:10:30 by cfelicio         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
 char	*g_v1;
@@ -13,8 +25,7 @@ void	ft_putnbr(int n)
 	write(1, &"0123456789"[n % 10], 1);
 }
 
-
-int	ft_atoi(char *str)
+int		ft_atoi(char *str)
 {
 	int ris;
 	int sign;
@@ -39,7 +50,7 @@ int	ft_atoi(char *str)
 	return (ris * sign);
 }
 
-int	ft_calculate()
+int		ft_calculate(void)
 {
 	if (*g_op == '+')
 		ft_putnbr(g_n1 + g_n2);
@@ -66,11 +77,11 @@ int	ft_calculate()
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	int err;
 
-	if(argc == 4)
+	if (argc == 4)
 	{
 		g_n1 = ft_atoi(argv[1]);
 		g_op = argv[2];

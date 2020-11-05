@@ -38,7 +38,7 @@ int	ft_is_decresc(int *tab, int length, int (*f)(int, int))
 	return (1);
 }
 
-int ft_is_sort(int *tab, int length, int(*f)(int, int))
+int	ft_is_sort(int *tab, int length, int (*f)(int, int))
 {
 	if (ft_is_cresc(tab, length, f) || ft_is_decresc(tab, length, f))
 		return (1);
