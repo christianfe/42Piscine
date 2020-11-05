@@ -10,14 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <libgen.h>
+#include <errno.h>
+#include <string.h>
 
 char	*g_name_progr;
 char	*g_buf;
 int		g_fd;
 int		g_buffer_size;
 
-int	ft_atoi(char *str)
+void	ft_putstr(char *str);
+void	ft_print_error_msg(char *file, char *program_name);
+
+int		ft_atoi(char *str)
 {
 	int ris;
 	int sign;
@@ -69,7 +77,7 @@ void	ft_display_file(int fd)
 	}
 }
 
-void	ft_display(int ac, char *av[])
+void	ft_display(int ac, char **av)
 {
 	int i;
 	int k;
@@ -81,7 +89,7 @@ void	ft_display(int ac, char *av[])
 		errno = 0;
 		if ((g_fd = open(av[i], O_RDONLY)) == -1)
 		{
-			print_error_msg(av[i]);
+			ft_print_error_msg(av[i], g_name_progr);
 			continue ;
 		}
 		if (ac > 4)
@@ -93,16 +101,13 @@ void	ft_display(int ac, char *av[])
 			ft_putstr(" <==\n");
 		}
 		k = 1;
-		display_file(g_fd);
+		ft_display_file(g_fd);
 		close(g_fd);
 	}
 }
 
-int		main(int argc, char **argv[])
+int		main(int argc, char **argv)
 {
-	int	fd;
-	int	i;
-
 	g_name_progr = argv[0];
 	g_buf = argv[2];
 	g_buffer_size = ft_atoi(argv[2]);
@@ -110,7 +115,7 @@ int		main(int argc, char **argv[])
 	if (argc == 3)
 		ft_display_file(0);
 	else
-		display(argc, argv);
+		ft_display(argc, argv);
 	free(g_buf);
 	return (0);
 }

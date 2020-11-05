@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_foreach.c                                       :+:      :+:    :+:   */
+/*   ft_tail_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 08:43:11 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/11/05 08:43:13 by cfelicio         ###   ########.fr       */
+/*   Created: 2020/11/05 09:18:39 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/05 09:18:41 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_foreach(int *tab, int length, void(*f)(int))
-{
-	int i;
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
+#include <libgen.h>
 
-	i = 0;
-	while (i < length)
+void	ft_putstr(char *str)
+{
+	while (*str)
 	{
-		f(tab[i]);
-		i++;
+		write(1, str, 1);
+		str++;
 	}
+}
+
+void	ft_print_error_msg(char *file, char *program_name)
+{
+	ft_putstr(basename(program_name));
+	ft_putstr(": ");
+	ft_putstr(file);
+	ft_putstr(": ");
+	ft_putstr(strerror(errno));
+	ft_putstr("\n");
+	errno = 0;
 }
