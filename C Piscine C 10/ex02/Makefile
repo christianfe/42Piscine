@@ -2,13 +2,11 @@ OBJS		= ${SRCS:.c=.o}
 
 SRCS		= ft_tail.c ft_tail_2.c
 
-NAME		= ft_tail
+OUT			= ft_tail
 
 all:		${OBJS}
-			gcc -Wall -Werror -Wextra ${SRCS} -o ${NAME}
+			gcc -Wall -Werror -Wextra ${SRCS} -o ${OUT}
 			rm ${OBJS}
-
-${NAME}		all
 
 clean:
 			rm -f ${OBJS}
@@ -16,6 +14,4 @@ clean:
 fclean:		clean
 			rm -f ${OUT}
 
-re:			fclean all
-
-.PHONY:		${NAME} all clean fclean re
+.PHONY:		all clean fclean
