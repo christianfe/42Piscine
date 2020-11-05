@@ -10,10 +10,14 @@ all:		${OBJS}
 			gcc -Wall -Werror -Wextra ${NAME} -o ${OUT}
 			rm ${OBJS}
 
+${NAME}:	all
+
 clean:
 			rm -f ${OBJS}
 
 fclean:		clean
 			rm -f ${OUT}
 
-.PHONY:		all clean fclean
+re:			fclean all
+
+.PHONY:		${NAME} all clean fclean re 
