@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_elem.c                                   :+:      :+:    :+:   */
+/*   ft_list_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 14:45:11 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/11/05 14:45:12 by cfelicio         ###   ########.fr       */
+/*   Created: 2020/11/05 15:22:03 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/05 15:22:05 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_list.h"
 
-t_list	*ft_create_elem(void *data)
+int ft_list_size(t_list *begin_list)
 {
-	t_list *list;
+	int i;
 
-	list = malloc (sizeof(t_list));
-	list->data = data;
-	list->next = 0;
-	return (list);
+	i = 0;
+	while(begin_list)
+	{
+		begin_list = begin_list->next;
+		i++;
+	}
+	return (i);
 }
