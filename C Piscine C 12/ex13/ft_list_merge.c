@@ -14,13 +14,15 @@
 
 void	ft_list_merge(t_list **begin_list1, t_list *begin_list2)
 {
-	t_list *begin1;
-	t_list *begin2;
+	t_list *list_ptr;
 
-	begin1 = *begin_list1;
-	begin2 = *begin_list2;	
-	while (begin1->next)
+	list_ptr = *begin_list1;
+	if (!list_ptr)
 	{
-
+		*begin_list1 = begin_list2;
+		return ;
 	}
+	while (list_ptr->next)
+		list_ptr = list_ptr->next;
+	list_ptr->next = begin_list2;
 }
