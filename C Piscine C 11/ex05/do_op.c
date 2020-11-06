@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
 
 char	*g_v1;
 char	*g_op;
@@ -18,11 +19,46 @@ char	*g_v2;
 int		g_n1;
 int		g_n2;
 
-void	ft_putnbr(int n)
+int		f_pow(int p)
 {
-	if (n > 9)
-		ft_putnbr(n / 10);
-	write(1, &"0123456789"[n % 10], 1);
+	int ris;
+
+	ris = 1;
+	while (p > 0)
+	{
+		ris *= 10;
+		p--;
+	}
+	return (ris);
+}
+
+void	ft_putnbr(int nb)
+{
+	long			var[3];
+	char			c;
+
+	var[1] = 0;
+	var[2] = nb;
+	if (nb < 0)
+	{
+		write(1, "-", 1);
+		var[2] *= -1;
+	}
+	else if (nb == 0)
+		write(1, "0", 1);
+	var[0] = var[2];
+	while (var[0] > 0)
+	{
+		var[0] /= 10;
+		var[1]++;
+	}
+	while (var[1] > 0)
+	{
+		c = 48 + (var[2] / f_pow(var[1] - 1));
+		var[2] = var[2] - ((var[2] / f_pow(var[1] - 1)) * f_pow(var[1] - 1));
+		write(1, &c, 1);
+		var[1]--;
+	}
 }
 
 int		ft_atoi(char *str)
@@ -52,28 +88,30 @@ int		ft_atoi(char *str)
 
 int		ft_calculate(void)
 {
+	int ris;
+
+	ris = 0;
 	if (*g_op == '+')
-		ft_putnbr(g_n1 + g_n2);
+		ris = (g_n1 + g_n2);
 	else if (*g_op == '-')
-		ft_putnbr(g_n1 - g_n2);
+		ris = (g_n1 - g_n2);
 	else if (*g_op == '*')
-		ft_putnbr(g_n1 * g_n2);
+		ris = (g_n1 * g_n2);
 	else if (*g_op == '/')
 	{
 		if (g_n2 != 0)
-			ft_putnbr(g_n1 / g_n2);
+			ris = (g_n1 / g_n2);
 		else
 			return (1);
 	}
 	else if (*g_op == '%')
 	{
 		if (g_n2 != 0)
-			ft_putnbr(g_n1 % g_n2);
+			ris = (g_n1 % g_n2);
 		else
 			return (2);
 	}
-	else
-		ft_putnbr(0);
+	ft_putnbr(ris);
 	return (0);
 }
 
