@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_map.c                                           :+:      :+:    :+:   */
+/*   ft_sorted_list_insert.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 08:43:21 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/11/05 08:43:22 by cfelicio         ###   ########.fr       */
+/*   Created: 2020/11/06 11:10:45 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/06 11:10:47 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-int	*ft_map(int *tab, int length, int (*f)(int))
+void ft_sorted_list_insert(t_list **begin_list, void *data, int (*cmp)())
 {
-	int *ris;
-	int i;
 
-	i = 0;
-	ris = malloc(sizeof(int) * length);
-	if (!ris)
-		return (0);
-	while (i < length)
-	{
-		ris[i] = f(tab[i]);
-		i++;
-	}
-	return (ris);
 }
