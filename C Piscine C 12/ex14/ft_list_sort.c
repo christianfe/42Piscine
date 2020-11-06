@@ -12,7 +12,7 @@
 
 #include "ft_list.h"
 
-void ft_list_sort(t_list **begin_list, int (*cmp)())
+void	ft_list_sort(t_list **begin_list, int (*cmp)())
 {
 	t_list *l1;
 	t_list *l2;
@@ -24,11 +24,11 @@ void ft_list_sort(t_list **begin_list, int (*cmp)())
 	{
 		while (l2->next)
 		{
-			if (cmp(l1->data, l2->data))
+			if (cmp(l1->data, l2->data) > 0)
 			{
-				temp = l1,
-				l1 = l2;
-				l2 = temp;
+				temp = l1->data;
+				l1->data = l2->data;
+				l2->data = temp;
 			}
 			l2 = l2->next;
 		}
