@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_foreach_if.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/06 09:04:21 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/06 09:04:23 by cfelicio         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_list.h"
 
-void ft_list_foreach_if(t_list *begin_list, void (*f)(void *), void
+void	ft_list_foreach_if(t_list *begin_list, void (*f)(void *), void
 						*data_ref, int (*cmp)())
 {
 	while (begin_list)
@@ -9,5 +21,4 @@ void ft_list_foreach_if(t_list *begin_list, void (*f)(void *), void
 			f(begin_list->data);
 		begin_list = begin_list->next;
 	}
-	
 }

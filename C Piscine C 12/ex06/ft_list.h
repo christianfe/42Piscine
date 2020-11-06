@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_size.c                                     :+:      :+:    :+:   */
+/*   ft_list.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 15:22:03 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/11/05 15:22:05 by cfelicio         ###   ########.fr       */
+/*   Created: 2020/11/05 14:45:18 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/05 14:45:19 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
 
-int	ft_list_size(t_list *begin_list)
+#ifndef FT_LIST_H
+# define FT_LIST_H
+
+typedef struct	s_list
 {
-	int i;
+	void *data;
+	struct s_list *next;
+}				t_list;
 
-	i = 0;
-	while (begin_list)
-	{
-		begin_list = begin_list->next;
-		i++;
-	}
-	return (i);
-}
+
+#endif

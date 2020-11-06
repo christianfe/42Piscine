@@ -1,4 +1,16 @@
-void ft_list_reverse(t_list **begin_list)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_reverse.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/06 09:04:43 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/06 09:04:44 by cfelicio         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+void	ft_list_reverse(t_list **begin_list)
 {
 	t_list	*temp;
 	t_list	*prec;
@@ -17,5 +29,5 @@ void ft_list_reverse(t_list **begin_list)
 		corr = temp;
 	}
 	corr->next = prec;
-	*begin_list = corr;	
+	*begin_list = corr;
 }
