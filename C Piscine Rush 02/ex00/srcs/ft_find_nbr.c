@@ -10,66 +10,130 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_rush02.h"
+#include "ft_rush02.h"
 
-int		ft_strlen(char *str);
-int		ft_read_file(char *path, char *to_find, int size, t_list *result);
-void	ft_setzero(char *dest, char *nbr, int n, int type);
-void	ft_isolate_nbr(char *dest, char *nbr, int n);
-char	*ft_rev_cut(char *nbr, int t);
-char	*ft_cut(char *nbr, int t);
-char	*ft_strcpy(char *dest, char *src);
-char	*ft_adv_cut(char *nbr, int min, int max);
+char	*g_temp;
+int		g_first;
 
-int	ft_find_nbr(char *nbr, char *path, t_list *result, int lenght)
+void	ft_check_is_in_file(char c, int *m, char *to_find, int *ii)
 {
-	char	*temp;
-	int 	i;
+	int mach;
+	int i;
 
-	i = 0;
-	temp = malloc(sizeof(char) * lenght + 1);
-	if (ft_read_file(path, nbr, lenght, result) != 0)
-		return (0);
-	ft_strcpy(temp, nbr);
-	if (lenght == 1)
-		ft_read_file(path, temp, lenght, result);
-	else if (lenght == 2)
+	mach = *m;
+	i = *ii;
+	if (c == to_find[i])
 	{
-		if ((ft_read_file(path, temp, lenght, result)) == 0)
+		mach--;
+		i++;
+	}
+	else
+	{
+		mach = -1;
+		i = 0;
+	}
+	*ii = i;
+	*m = mach;
+}
+
+int		ft_is_in_file(int fd, char *to_find, int size)
+{
+	int		mach;
+	char	c;
+	int		i;
+	int		row;
+
+	mach = size;
+	row = 1;
+	i = 0;
+	while (read(fd, &c, 1))
+	{
+		if (mach == 0 && (c == ' ' || c == ':'))
+			return (row);
+		ft_check_is_in_file(c, &mach, to_find, &i);
+		if (c == '\n')
 		{
-			ft_setzero(temp, nbr, 1, 0);
-			ft_read_file(path, temp, lenght, result);
-			ft_find_nbr(ft_rev_cut(nbr, 1), path, result, 1);
+			mach = size;
+			row++;
 		}
 	}
-	else if ((lenght % 3) == 0)
+	return (0);
+}
+
+void	ft_iter2(char *nbr, char *path, int lenght)
+{
+	if (lenght == 2)
 	{
-		ft_read_file(path, nbr, 1, result);
-		ft_setzero(temp, nbr, 1, 1);
-		ft_read_file(path, temp, 3, result);
-		ft_find_nbr(ft_rev_cut(nbr, 1), path, result, 2);
-		if (lenght > 3)
+		if ((ft_read_file(path, g_temp, lenght)) == 0)
 		{
-			ft_setzero(temp, nbr, 1, 1);
-			ft_read_file(path, temp, lenght - 2, result);
-			ft_find_nbr(ft_rev_cut(nbr, 3), path, result, lenght - 3);
+			ft_setzero(g_temp, nbr, 1, 0);
+			ft_read_file(path, g_temp, lenght);
+			ft_find_nbr(ft_rev_cut(nbr, 1), path, 1);
 		}
 	}
 	else if ((lenght % 3) == 1)
 	{
-		ft_find_nbr(nbr, path, result, 1);
-		ft_setzero(temp, nbr, 1, 1);
-		ft_read_file(path, temp, lenght, result);
-		ft_find_nbr(ft_rev_cut(nbr, 1), path, result, lenght - 1);
-	
+		ft_find_nbr(nbr, path, 1);
+		ft_setzero(g_temp, nbr, 1, 1);
+		ft_read_file(path, g_temp, lenght);
+		ft_find_nbr(ft_rev_cut(nbr, 1), path, lenght - 1);
 	}
 	else if ((lenght % 3) == 2)
 	{
-		
-		ft_find_nbr(nbr, path, result, 2);
-		ft_setzero(temp, ft_rev_cut(nbr, 1), 1, 1);
-		ft_read_file(path, temp, lenght-1, result);
-		ft_find_nbr(ft_rev_cut(nbr, 2), path, result, lenght - 2);		
+		ft_find_nbr(nbr, path, 2);
+		ft_setzero(g_temp, ft_rev_cut(nbr, 1), 1, 1);
+		ft_read_file(path, g_temp, lenght - 1);
+		ft_find_nbr(ft_rev_cut(nbr, 2), path, lenght - 2);
 	}
+}
+
+void	ft_iter(char *nbr, char *path, int lenght)
+{
+	if ((lenght % 3) == 0)
+	{
+		if (nbr[0] != '0')
+		{
+			ft_read_file(path, nbr, 1);
+			ft_setzero(g_temp, nbr, 1, 1);
+			ft_read_file(path, g_temp, 3);
+		}
+		ft_find_nbr(ft_rev_cut(nbr, 1), path, 2);
+		if (lenght > 3)
+		{
+			if (nbr[0] != '0' || nbr[1] != '0' || nbr[2] != '0')
+			{
+				ft_setzero(g_temp, nbr, 1, 1);
+				ft_read_file(path, g_temp, lenght - 2);
+			}
+			ft_find_nbr(ft_rev_cut(nbr, 3), path, lenght - 3);
+		}
+	}
+	else
+		ft_iter2(nbr, path, lenght);
+}
+
+int		ft_find_nbr(char *nbr, char *path, int lenght)
+{
+	int		i;
+
+	i = 0;
+	if (ft_dict_max(path) + 3 <= lenght)
+		return (0);
+	if (lenght > 1)
+		g_first = 0;
+	if (!(g_temp = malloc(sizeof(char) * 200)))
+		return (0);
+	ft_list_push_back(g_to_free, g_temp);
+	ft_strcpy(g_temp, nbr);
+	if (lenght == 1)
+	{
+		if (nbr[0] == '0')
+			if (g_first)
+				ft_read_file(path, g_temp, lenght);
+		if (nbr[0] != '0')
+			ft_read_file(path, g_temp, lenght);
+	}
+	else
+		ft_iter(nbr, path, lenght);
 	return (1);
 }

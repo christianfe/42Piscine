@@ -10,48 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_rush02.h"
+#include "ft_rush02.h"
 
 int	g_row_find;
+int	g_i;
 
-int		ft_strcmp(char *s1, char *s2);
-t_list	*ft_create_elem(void *data);
-void	ft_list_push_back(t_list *begin_list, void *data);
-int		ft_is_in_file(int fd, char *to_find, int size);
-void	ft_putstr(char *str);
-
-char	*ft_find_world_file(char *path, char *to_find, int len)
+char	*ft_find_world_file(int len, int fd)
 {
 	char	char_read;
 	char	*world;
-	int		i;
-	int		fd;
 
-	fd = open(path, O_RDONLY);
-	i = 1;
-	while (i != len)
+	g_i = 1;
+	while (g_i != len)
 	{
 		read(fd, &char_read, 1);
 		if (char_read == '\n')
-			i++;
+			g_i++;
 	}
 	read(fd, &char_read, 1);
-	while (char_read == ' ' || char_read == ':' || (char_read >= '0' && char_read <= '9'))
+	while (char_read == ' ' || char_read == ':' ||
+		(char_read >= '0' && char_read <= '9'))
 		read(fd, &char_read, 1);
-	i = 0;
-	world = malloc(sizeof(char) * 10);
+	g_i = 0;
+	if (!(world = malloc(sizeof(char) * 100)))
+		return (0);
+	ft_list_push_back(g_to_free, world);
 	while (char_read != '\n')
 	{
-		world[i] = char_read;
-		read(fd, &char_read, 1) ;
-		i++;
+		world[g_i] = char_read;
+		read(fd, &char_read, 1);
+		g_i++;
 	}
-	close(fd);
-	world[i] = 0;
 	return (world);
 }
 
-int		ft_read_file(char *path, char *to_find, int size, t_list *result)
+int		ft_read_file(char *path, char *to_find, int size)
 {
 	int fd;
 	int ris;
@@ -59,12 +52,10 @@ int		ft_read_file(char *path, char *to_find, int size, t_list *result)
 	fd = open(path, O_RDONLY);
 	ris = ft_is_in_file(fd, to_find, size);
 	close(fd);
-	//printf("READ LINE CALL SEARCHING %s: %i (len=%i)[case->%i]\n",to_find, ris,size, size%2);
 	if (!ris)
 		return (ris);
-	//ft_list_push_back(result, ft_find_world_file(path, to_find));
-	printf("%s ", ft_find_world_file(path, to_find, ris));
+	fd = open(path, O_RDONLY);
+	ft_list_push_back(g_result, ft_find_world_file(ris, fd));
 	close(fd);
 	return (ris);
 }
- 

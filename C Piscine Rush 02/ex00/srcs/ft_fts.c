@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_rush02.h"
-
-int		ft_strlen(char *str);
+#include "ft_rush02.h"
 
 void	ft_setzero(char *dest, char *nbr, int n, int type)
 {
@@ -40,7 +38,7 @@ void	ft_isolate_nbr(char *dest, char *nbr, int n)
 	int i;
 
 	i = 0;
-	while(nbr[i] && i < n)
+	while (nbr[i] && i < n)
 	{
 		dest[i] = nbr[i];
 		i++;
@@ -48,46 +46,15 @@ void	ft_isolate_nbr(char *dest, char *nbr, int n)
 	dest[i] = '\0';
 }
 
-int		ft_is_in_file(int fd, char *to_find, int size)
-{
-	int mach;
-	char c;
-	int i;
-	int row;
-
-	mach = size;
-	row = 1;
-	i = 0;
-	while (read(fd, &c, 1))
-	{
-		if (mach == 0 && (c == ' ' || c == ':'))
-			return (row);
-		if (c == to_find[i])
-		{
-			mach--;
-			i++;
-		}
-		else
-		{
-			mach = -1;
-			i = 0;
-		}
-		if (c == '\n')
-		{
-			mach = size;
-			row++;
-		}
-	}
-	return (0);
-}
-
 char	*ft_cut(char *nbr, int t)
 {
-	char *ris;
-	int i;
+	char	*ris;
+	int		i;
 
 	i = 0;
-	ris = malloc(sizeof(char) * 100);
+	if (!(ris = malloc(sizeof(char) * 200)))
+		return (0);
+	ft_list_push_back(g_to_free, ris);
 	while (i < t)
 	{
 		ris[i] = nbr[i];
@@ -99,13 +66,15 @@ char	*ft_cut(char *nbr, int t)
 
 char	*ft_rev_cut(char *nbr, int t)
 {
-	char *ris;
-	int i;
-	int k;
+	char	*ris;
+	int		i;
+	int		k;
 
 	k = 0;
 	i = ft_strlen(nbr);
-	ris = malloc(sizeof(char) * 100);
+	if (!(ris = malloc(sizeof(char) * 200)))
+		return (0);
+	ft_list_push_back(g_to_free, ris);
 	while (t < i)
 	{
 		ris[k] = nbr[t];
@@ -118,11 +87,13 @@ char	*ft_rev_cut(char *nbr, int t)
 
 char	*ft_adv_cut(char *nbr, int min, int max)
 {
-	char *ris;
-	int i;
+	char	*ris;
+	int		i;
 
 	i = 0;
-	ris = malloc(sizeof(char) * 100);
+	if (!(ris = malloc(sizeof(char) * 200)))
+		return (0);
+	ft_list_push_back(g_to_free, ris);
 	while (min < max)
 	{
 		ris[i] = nbr[min];
