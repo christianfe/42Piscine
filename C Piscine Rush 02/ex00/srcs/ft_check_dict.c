@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_rush02.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int		g_fd;
 char	g_char_read;

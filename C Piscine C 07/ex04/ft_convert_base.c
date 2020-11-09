@@ -14,12 +14,12 @@
 
 int		ft_strlen(char *str);
 
-void	ft_putnbr_base(int nbr, char *base, char *nb_dest);
+void	ft_encodenbr_base(int nbr, char *base, char *nb_dest);
 
-int		ft_check_base(char *base)
+int		ft_check_error_in_base(char *base)
 {
 	char	*checkbase;
-	int		i;
+	int		i_check;
 
 	checkbase = base;
 	if (*base == 0 || *(base + 1) == 0)
@@ -29,19 +29,19 @@ int		ft_check_base(char *base)
 		if (*checkbase == '+' || *checkbase == '-'
 			|| *checkbase == ' ' || *checkbase <= 31)
 			return (0);
-		i = 1;
-		while (*(checkbase + i))
+		i_check = 1;
+		while (*(checkbase + i_check))
 		{
-			if (*(checkbase + i) == *checkbase)
+			if (*(checkbase + i_check) == *checkbase)
 				return (0);
-			i++;
+			i_check++;
 		}
 		checkbase++;
 	}
 	return (1);
 }
 
-char	*ft_char_is_in_base(char *base, char *to_find)
+char	*ft_is_in_base(char *base, char *to_find)
 {
 	int i;
 
@@ -57,39 +57,39 @@ char	*ft_char_is_in_base(char *base, char *to_find)
 
 int		ft_atoi_base(char *str, char *base)
 {
-	unsigned int	ris;
-	int				sign;
+	unsigned int	nombre;
+	int				signe;
 	char			*charptr;
 
-	ris = 0;
-	sign = 1;
+	nombre = 0;
+	signe = 1;
 	charptr = str;
 	while (*charptr == ' ' || (*charptr >= 9 && *charptr <= 13))
 		charptr++;
 	while (*charptr == '-' || *charptr == '+')
 	{
 		if (*charptr == '-')
-			sign *= -1;
+			signe *= -1;
 		charptr++;
 	}
-	while (ft_char_is_in_base(base, charptr))
+	while (ft_is_in_base(base, charptr))
 	{
-		ris *= ft_strlen(base);
-		ris += (unsigned int)(ft_char_is_in_base(base, charptr) - base);
+		nombre *= ft_strlen(base);
+		nombre += (unsigned int)(ft_is_in_base(base, charptr) - base);
 		charptr++;
 	}
-	return (int)(ris * sign);
+	return (int)(nombre * signe);
 }
 
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
 	int		nb_int;
-	char	*nb;
+	char	*nb_converti;
 
-	if (!(ft_check_base(base_from) && ft_check_base(base_to)))
+	if (!(ft_check_error_in_base(base_from) && ft_check_error_in_base(base_to)))
 		return (0);
-	nb = malloc(34);
+	nb_converti = malloc(34);
 	nb_int = ft_atoi_base(nbr, base_from);
-	ft_putnbr_base(nb_int, base_to, nb);
-	return (nb);
+	ft_encodenbr_base(nb_int, base_to, nb_converti);
+	return (nb_converti);
 }

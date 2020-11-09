@@ -12,15 +12,20 @@
 
 int		ft_strlen(char *str)
 {
-	int i;
+	char	*charptr;
+	int		i;
 
+	charptr = str;
 	i = 0;
-	while (*(str + i))
+	while (*charptr != 0)
+	{
 		i++;
+		charptr++;
+	}
 	return (i);
 }
 
-void	ft_reverse_str(char *str, int size)
+void	ft_strev(char *str, int offset_of_center)
 {
 	int		len;
 	int		i;
@@ -30,14 +35,14 @@ void	ft_reverse_str(char *str, int size)
 	i = 0;
 	while (i < len / 2)
 	{
-		temp = str[i + size];
-		str[i + size] = str[len - i - 1];
+		temp = str[i + offset_of_center];
+		str[i + offset_of_center] = str[len - i - 1];
 		str[len - i - 1] = temp;
 		i++;
 	}
 }
 
-void	ft_putnbr_base(int nbr, char *base, char *dest)
+void	ft_encodenbr_base(int nbr, char *base, char *nb_dest)
 {
 	unsigned int	lenbase;
 	unsigned int	nbr_unsigned;
@@ -46,22 +51,22 @@ void	ft_putnbr_base(int nbr, char *base, char *dest)
 	i = 0;
 	if (nbr < 0)
 	{
-		dest[i++] = '-';
+		nb_dest[i++] = '-';
 		nbr_unsigned = (unsigned int)(-1 * nbr);
 	}
 	else
 		nbr_unsigned = (unsigned int)nbr;
 	lenbase = ft_strlen(base);
 	if (nbr_unsigned == 0)
-		dest[i++] = *(base);
+		nb_dest[i++] = *(base);
 	while (nbr_unsigned > 0)
 	{
-		dest[i++] = *(base + (nbr_unsigned % lenbase));
+		nb_dest[i++] = *(base + (nbr_unsigned % lenbase));
 		nbr_unsigned /= lenbase;
 	}
-	dest[i] = 0;
-	if (nbr < 0)
-		ft_reverse_str(dest, 1);
+	nb_dest[i] = 0;
+	if (nbr < 0) 
+		ft_strev(nb_dest, 1);
 	else
-		ft_reverse_str(dest, 0);
+		ft_strev(nb_dest, 0);
 }
