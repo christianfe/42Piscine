@@ -1,18 +1,26 @@
 OBJS		= ${SRCS:.c=.o}
 
-SRCS		= do_op.c
+SRCS		= srcs/do_op.c srcs/ft_op.c srcs/ft_program_adds.c
 
-OUT			= do-op
+NAME		= do-op
 
-all:		
-			gcc -Wall -Werror -Wextra ${SRCS} -o ${OUT}
+FLAGS		= -Wall -Wextra -Werror -g
+
+CC			= gcc
+
+.c.o:
+			${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+
+all:		${OBJS}
+			${CC} -o ${NAME} ${OBJS}
+			rm ${OBJS}
 
 clean:
 			rm -f ${OBJS}
 
 fclean:		clean
-			rm -f ${OUT}
+			rm -f ${NAME}
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re ${NAME}
