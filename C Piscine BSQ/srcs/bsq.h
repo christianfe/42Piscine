@@ -15,8 +15,9 @@ typedef struct	s_map
 	char	obstacle;
 }				t_map;
 
-extern char *g_path;
-extern t_map g_map;
+extern char		*g_path;
+extern t_map	g_map;
+extern int		*g_table;
 
 int		ft_atoi(int size);
 int		ft_create_map();

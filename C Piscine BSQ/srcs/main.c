@@ -1,12 +1,14 @@
 #include "bsq.h"
 
-char *g_path;
-t_map g_map;
+char	*g_path;
+t_map	g_map;
+int		*g_table;
 
 int		ft_bsq()
 {
 	if (!ft_create_map())
 		return(0);
+	ft_calculate_area();
 	return (1);
 }
 
@@ -35,7 +37,7 @@ int		main(int argc, char **argv)
 				return (0);
 			}
 			i++;
-
+			free(g_table);
 		}
 		printf("%s", g_path);
 	}
