@@ -119,5 +119,6 @@ int		ft_create_map()
 		i++;
 	}
 	close(fd);
+	g_map.size = g_map.x_size * g_map.y_size;
 	return(1);
 }

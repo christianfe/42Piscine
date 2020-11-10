@@ -10,6 +10,7 @@ typedef struct	g_p
 {
 	int		x_size;
 	int		y_size;
+	int		size;
 	char	full;
 	char	empty;
 	char	obstacle;
