@@ -4,8 +4,7 @@ void	ft_read_stdin()
 {
 	char *line = NULL;
 	size_t len = 0;
-	ssize_t lineSize = 0;
-	lineSize = getline(&line, &len, stdin);
+	getline(&line, &len, stdin);
 	g_path = line;
 	free(line);
 }
@@ -17,26 +16,15 @@ int ft_first_row(int fd)
 	read(fd, &c, 1);
 	while  (c <= '9' && c >= '0')
 		read(fd, &c, 1);
+	if (c == '\n')
+		return (0);
+	g_map.empty = c;
 	read(fd, &c, 1);
-	if (c != '\n')
-	{
-		g_map.empty = c;
-		read(fd, &c, 1);
-	}
 	if (c == '\n')
 		return (0);
-	if (c != '\n')
-	{
-		g_map.obstacle = c;
-		read(fd, &c, 1);
-	}
-	if (c == '\n')
-		return (0);
-	if (c != '\n')
-	{
-		g_map.full = c;
-		read(fd, &c, 1);
-	}
+	g_map.obstacle = c;
+	read(fd, &c, 1);
+	g_map.full = c;
 	return (1);
 }
 
@@ -45,20 +33,24 @@ int ft_all_row(int fd)
 	char	c;
 	int		len;
 
+	len = 0;
+	g_map.x_size = 0;
+	read(fd, &c, 1);
 	while  (read(fd, &c, 1))
 	{
-		if (c != '\n')
+		len++;
+		if (c == '\n')
 		{
 			if (g_map.x_size == 0)
 				g_map.x_size = len;
 			else if (g_map.x_size == len)
-				continue;
+				;
 			else
 				return (0);
+			len = 0;
 		}
 		if (c != g_map.empty && c != g_map.obstacle && c != '\n')
 			return (0);
-		len++;
 	}
 	if (c == '\n')
 		return (1);
@@ -92,9 +84,9 @@ int ft_checkmap()
 	return (1);
 }
 
-int		ft_create_map(char *g_path)
+int		ft_create_map()
 {
-	if (ft_checkmap())
+	if (!ft_checkmap())
 		return(0);
 	if (!g_path)
 		ft_read_stdin();

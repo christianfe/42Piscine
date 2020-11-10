@@ -19,6 +19,6 @@ extern char *g_path;
 extern t_map g_map;
 
 int		ft_atoi(int size);
-int		ft_create_map(char *g_path);
+int		ft_create_map();
 
 #endif
