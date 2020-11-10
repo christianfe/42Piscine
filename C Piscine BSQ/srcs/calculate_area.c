@@ -56,5 +56,8 @@ void	ft_fullize_map(void)
 			ft_print_map();
 			ft_free_array();
 		}
+		up = 0;
+		down = 0;
+		len = 0;
 	}
 }
