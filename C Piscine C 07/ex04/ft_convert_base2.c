@@ -65,7 +65,7 @@ void	ft_encodenbr_base(int nbr, char *base, char *nb_dest)
 		nbr_unsigned /= lenbase;
 	}
 	nb_dest[i] = 0;
-	if (nbr < 0) 
+	if (nbr < 0)
 		ft_strev(nb_dest, 1);
 	else
 		ft_strev(nb_dest, 0);
