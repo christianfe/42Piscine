@@ -7,7 +7,7 @@ int		ft_calculate_len(int pos, int len, int up, int down)
 	
 	temp = 0;
 	pos2 = pos - (up * g_map.x_size);
-	while(ft_is_free(pos2, 1) && !ft_is_border(pos2 + 1) && temp < len)
+	/*while(ft_is_free(pos2, 1) && !ft_is_border(pos2 + 1) && temp < len)
 	{
 		temp++;
 		pos2++;
@@ -16,7 +16,7 @@ int		ft_calculate_len(int pos, int len, int up, int down)
 		return (0);
 	if (up >= (down * -1))
 		return (ft_calculate_len(pos, len, up - 1, down));
-	else
+	else*/
 		return (1);
 }
 
