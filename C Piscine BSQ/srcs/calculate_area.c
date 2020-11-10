@@ -38,13 +38,13 @@ int		ft_col_lim(int pos)
 
 	i = 0;
 	find = 0;
-	start = pos - (pos % g_map.y_size);
+	start = pos % g_map.x_size;
 	while (i < g_map.y_size)
 	{
 		if (i + start == pos)
 			find = 1;
 		
-		if (!g_table[start * (i + 1)])
+		if (!g_table[start * (i)])
 			max++;
 		else 
 		{
