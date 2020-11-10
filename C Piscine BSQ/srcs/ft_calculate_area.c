@@ -29,36 +29,43 @@ void	ft_free_array(void)
 	}
 }
 
-int		ft_is_free_next(int pos)
+int		ft_is_free(int pos, int offset)
 {
-	if (pos % (g_map.x_size - 1) == 0)
-		return (0);
-	if (g_table[pos + 1] == 0)
-		return (1);
-	else
-		return (0);
+	return (g_table[pos + offset] == 0);
 }
 
-int		ft_place_x(int pos, int len)
+int		ft_is_border(int pos)
+{
+	if (pos >= 0 && pos <= g_map.x_size)
+		return (1);
+	if (pos % (g_map.x_size - 1) == 0)
+		return (1);
+	if (pos % (g_map.x_size) == 0)
+		return (1);
+	if (pos <= (g_map.x_size * g_map.y_size) &&
+		pos >= ((g_map.x_size * g_map.y_size) - g_map.x_size))
+		return (1);
+	return (0);
+}
+
+void	ft_place_x(int pos, int len, int rows)
 {
 	int i;
-	int row;
+	int row_off;
+	int count;
 
-	i = pos;
-	row = 0;
-	while (row < g_map.y_size)
+	count = 0;
+	row_off = 0;
+	while (row_off <= rows)
 	{
-		while (i < (pos - (pos % g_map.x_size) +g_map.x_size) && g_table[i] != 1)
+		i = pos + (row_off * g_map.x_size);
+		while (count < len)
 		{
 			g_table[i] = 2;
 			i++;
+			count++;
 		}
-		if (g_table[i] == 1 && row == 0)
-			return (-1);
-		else if (g_table[i] == 1)
-			break;
-		row ++;
-		i = pos + (g_map.x_size * row);
+		row_off++;
+		count = 0;
 	} 
-	return (row);
 }
