@@ -28,11 +28,11 @@ void	ft_fullize_map(void)
 	int down;
 
 	pos = 0;
-	up = 0;
-	down = 0;
-	len = 0;
 	while (pos < g_map.x_size * g_map.y_size)
 	{
+		up = 0;
+		down = 0;
+		len = 0;
 		if (!ft_is_free(pos, -1) || ft_is_border(pos))
 		{
 			while (ft_calculate_len(pos, len, up, down) == 1
@@ -56,8 +56,5 @@ void	ft_fullize_map(void)
 			ft_print_map();
 			ft_free_array();
 		}
-		up = 0;
-		down = 0;
-		len = 0;
 	}
 }
