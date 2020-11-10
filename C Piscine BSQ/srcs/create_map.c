@@ -44,8 +44,8 @@ int ft_all_row(int fd)
 		if (c == '\n')
 		{
 			if (g_map.x_size == 0)
-				g_map.x_size = len;
-			else if (g_map.x_size == len)
+				g_map.x_size = len - 1;
+			else if (g_map.x_size == len -1)
 				;
 			else
 				return (0);
@@ -96,11 +96,12 @@ int		ft_create_map()
 
 	i = 0;
 	g_size_file = 0;
-	if (!ft_checkmap())
-		return(0);
 	if (!g_path)
 		ft_read_stdin();
-	if ((g_table = (int *)malloc(sizeof(int) * (1 + g_size_file))) == NULL)
+	if (!ft_checkmap())
+		return(0);
+	printf("@@%i\n", g_size_file);
+	if ((g_table = malloc(sizeof(int) * (1 + g_size_file))) == NULL)
 		return (0);
 	if ((fd = open(g_path, O_RDONLY)) == -1)
 		return (0);
@@ -109,7 +110,7 @@ int		ft_create_map()
 		read(fd, &c, 1);
 	while (read(fd, &c, 1))
 	{
-		if (c != '\n')
+		if (c == '\n')
 			continue;
 		if (c == g_map.empty)
 			g_table[i] = 0;
@@ -117,6 +118,6 @@ int		ft_create_map()
 			g_table[i] = 1;
 		i++;
 	}
-	
+	close(fd);
 	return(1);
 }

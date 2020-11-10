@@ -3,10 +3,10 @@
 
 # include <unistd.h>
 # include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-typedef struct	s_map
+typedef struct	g_p
 {
 	int		x_size;
 	int		y_size;
@@ -20,8 +20,17 @@ extern t_map	g_map;
 extern int		*g_table;
 extern int		g_start_area;
 extern int		g_area;
+extern int		g_area_len;
+extern int		g_area_col;
 
 int		ft_atoi(int size);
+int		ft_is_free_next(int pos);
+void	ft_free_array(void);
+int 	ft_calculate_area();
+void	ft_place_x(int pos, int len, int col);
 int		ft_create_map();
+void	ft_print_map(void);
+void	ft_fullize_map();
+
 
 #endif

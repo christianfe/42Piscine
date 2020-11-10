@@ -1,74 +1,61 @@
 #include "bsq.h"
 
-int		ft_row_lim(int pos)
+int ft_try_full_row(int pos)
 {
 	int i;
-	int start;
-	int max;
-	int find;
 
-	i = 0;
-	find = 0;
-	start = pos - (pos % g_map.x_size);
-	while (i < g_map.x_size)
+	i = pos;
+	while(i < (pos - (pos % g_map.x_size) +g_map.x_size))
 	{
-		if (i + start == pos)
-			find = 1;
-		
-		if (!g_table[start + i])
-			max++;
-		else 
-		{
-			if (!find)
-				max = 0;
-			else 
-				break;
-		}
+		if (g_table[i] ==  0)
+			g_table[i] = 2;
+		else
+			break;
 		i++;
 	}
-	return (max);
+	printf("%i\n",(i - pos));
+	return (i - pos);
 }
 
-int		ft_col_lim(int pos)
+void	ft_fullize_map()
 {
-	int i;
-	int start;
-	int max;
-	int find;
+	int pos;
+	int len;
+	int col;
 
-	i = 0;
-	find = 0;
-	start = pos % g_map.x_size;
-	while (i < g_map.y_size)
+	pos = 0;
+
+	len = 1;
+	while (pos < g_map.x_size * g_map.y_size)
 	{
-		if (i + start == pos)
-			find = 1;
-		
-		if (!g_table[start * (i)])
-			max++;
-		else 
+		col = 1;
+		if (g_table[pos] == 1)
 		{
-			if (!find)
-				max = 0;
-			else 
-				break;
-		}
-		i++;
-	}
-	return (max);
-}
-
-void	ft_calculate_area(void)
-{
-	int i;
-	int x;
-
-	i = 0;
-	x = 0;
-	while (g_table[i])
-	{
-		if (g_table[i] == 1)
+			pos++;
+			col = 1;
+			len = 1;
 			continue;
-		x = ft_count_row();
+		}
+		if ((len = ft_try_full_row(pos)) == 1)
+		{
+			pos++;
+			continue;
+		}
+		while (1)
+		{
+			col = ft_place_x(pos, len, col);
+			if(ft_calculate_area() > g_area)
+			{
+				g_area = ft_calculate_area(pos, len);
+				g_start_area = pos;
+				g_area_len = len;
+			}
+			ft_print_map();
+			ft_free_array();
+			len--;
+		}
+		if (pos == 2)
+			break;
+		pos++;
 	}
 }
