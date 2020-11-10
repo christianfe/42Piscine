@@ -3,6 +3,8 @@
 char	*g_path;
 t_map	g_map;
 int		*g_table;
+int		g_start_area;
+int		g_area;
 
 int		ft_bsq()
 {
@@ -16,6 +18,8 @@ int		main(int argc, char **argv)
 {
 	int i;
 	
+	g_area = 0;
+	g_start_area = 0;
 	if (argc == 1)
 	{
 		g_path = 0;

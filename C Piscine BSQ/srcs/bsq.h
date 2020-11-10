@@ -18,6 +18,8 @@ typedef struct	s_map
 extern char		*g_path;
 extern t_map	g_map;
 extern int		*g_table;
+extern int		g_start_area;
+extern int		g_area;
 
 int		ft_atoi(int size);
 int		ft_create_map();
