@@ -30,7 +30,7 @@ do:
 			./gen/generator.pl 10 10 3 > ./gen/map
 			./gen/generator.pl 5 12 4 > ./gen/map1
 			./gen/generator.pl 7 5 3 > ./gen/map2
-			./gen/generator.pl 50 20 5 > ./gen/map3
+			./gen/generator.pl 50 20 2 > ./gen/map3
 			./${NAME} "./gen/map" "./gen/map1" "./gen/map2" "./gen/map3"
 
 run:
