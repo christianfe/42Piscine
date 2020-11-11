@@ -128,5 +128,8 @@ int		ft_create_map(t_data *t_map)
 			t_map->table[i] = 1;
 	close(fd);
 	t_map->size = t_map->x_size * t_map->y_size;
+	ft_print_map(t_map);
+	write(1, "\n", 1);
+	printf("%i %i %i\n", t_map->x_size, t_map->y_size, t_map->size);
 	return (1);
 }

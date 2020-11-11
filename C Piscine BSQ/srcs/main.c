@@ -44,7 +44,7 @@ void	ft_print_map(t_data *t_map)
 			write(1, &t_map->empty, 1);
 		else if (t_map->table[i] == 1)
 			write(1, &t_map->obstacle, 1);
-		if ((i + 1) % t_map->x_size == 0)
+		if ((i + 0) % t_map->x_size == 0)
 			write(1, "\n", 1);
 		i++;
 	}
