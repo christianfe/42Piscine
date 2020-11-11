@@ -26,7 +26,7 @@ extern int		g_area_col;
 
 int		ft_atoi(int size);
 int		ft_is_free(int pos, int offset);
-int		ft_is_border(int pos);
+int		ft_is_border(int pos, char c);
 void	ft_free_array(void);
 int 	ft_calculate_area();
 void	ft_place_x(int pos, int len, int rows);

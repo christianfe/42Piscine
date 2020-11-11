@@ -32,6 +32,7 @@ int		ft_bsq()
 {
 	if (!ft_create_map())
 		return(0);
+	ft_print_map();
 	ft_fullize_map();
 	ft_place_x(g_start_area, g_area_len, g_area_col);
 	ft_print_map();
