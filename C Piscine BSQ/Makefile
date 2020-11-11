@@ -25,7 +25,7 @@ fclean:		clean
 
 re:			fclean all
 
-do:			fclean all
+do:			
 			./gen/generator.pl 10 10 20 > ./gen/mapf
 			./gen/generator.pl 10 10 3 > ./gen/map
 			./gen/generator.pl 5 12 4 > ./gen/map1
