@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-typedef struct	s_map
+typedef struct	s_data
 {
 	int		x_size;
 	int		y_size;
@@ -28,28 +28,25 @@ typedef struct	s_map
 	char	obstacle;
 	char	*path;
 	int		area;
+	int		start_area;
 	int		area_len;
 	int		area_col;
 	int		*table;
-}				t_map;
+}				t_data;
 
-extern char		*g_path;
-extern t_map	g_map;
-extern int		*g_table;
-extern int		g_start_area;
-extern int		g_area;
-extern int		g_area_len;
-extern int		g_area_col;
-
-int		ft_atoi(int size);
-int		ft_is_free(int pos, int offset);
-int		ft_is_border(int pos, char c);
-void	ft_free_array(void);
-int 	ft_calculate_area();
-void	ft_place_x(int pos, int len, int rows);
-int		ft_create_map();
-void	ft_print_map(void);
-void	ft_fullize_map();
-
+void	ft_fullize_map(t_data *t_map);
+int		ft_calculate_up(t_data *t_map, int pos, int up, int len);
+int		ft_calculate_down(t_data *t_map,int pos, int down, int len);
+int		ft_calculate_len(t_data *t_map, int pos, int len);
+int		ft_create_map(t_data *t_map);
+int		ft_first_row(t_data *t_map, int fd);
+int 	ft_calculate_area(t_data *t_map);
+void	ft_free_array(t_data *t_map);
+int		ft_is_free(t_data *t_map, int pos, int offset);
+int		ft_is_border(t_data *t_map, int pos, char c);
+int		ft_atoi(t_data *t_map, int size);
+void	ft_place_x(t_data *t_map, int pos, int len, int rows);
+void	ft_print_map(t_data *t_map);
+int		ft_bsq(t_data *t_map);
 
 #endif

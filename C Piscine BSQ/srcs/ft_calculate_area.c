@@ -12,66 +12,66 @@
 
 #include "bsq.h"
 
-int 	ft_calculate_area(void)
+int 	ft_calculate_area(t_data *t_map)
 {
 	int i;
 	int area;
 	
 	i = 0;
 	area = 0;
-	while (i < g_map.x_size * g_map.y_size)
+	while (i < t_map->size)
 	{
-		if (g_table[i] == 2)
+		if (t_map->table[i] == 2)
 			area++;
 		i++;
 	}
 	return (area);
 }
 
-void	ft_free_array(void)
+void	ft_free_array(t_data *t_map)
 {
 	int i;
 
 	i = 0;
-	while (i < (g_map.x_size * g_map.y_size))
+	while (i < (t_map->size))
 	{
-		if (g_table[i] == 2)
-			g_table[i] = 0;
+		if (t_map->table[i] == 2)
+			t_map->table[i] = 0;
 		i++;
 	}
 }
 
-int		ft_is_free(int pos, int offset)
+int		ft_is_free(t_data *t_map, int pos, int offset)
 {
-	return (g_table[pos + offset] == 0);
+	return (t_map->table[pos + offset] == 0);
 }
 
-int		ft_is_border(int pos, char c)
+int		ft_is_border(t_data *t_map, int pos, char c)
 {
 	if (c == 'o')
 	{
-		if (pos >= 0 && pos <= g_map.x_size)
+		if (pos >= 0 && pos <= t_map->x_size)
 			return (1);
 	}
 	if (c == 'e')
 	{
-		if (pos <= (g_map.size) && pos >= ((g_map.size) - g_map.x_size))
+		if (pos <= (t_map->size) && pos >= ((t_map->size) - t_map->x_size))
 			return (1);
 	}
 	if (c == 'v')
 	{
-		if (pos % (g_map.x_size) == 0)
+		if (pos % (t_map->x_size) == 0)
 			return (1);
 	}
 	if (c == 'f')
 	{
-		if (pos % (g_map.x_size - 1) == 0)
+		if (pos % (t_map->x_size - 1) == 0)
 			return (1);
 	}	
 	return (0);
 }
 
-void	ft_place_x(int pos, int len, int rows)
+void	ft_place_x(t_data *t_map, int pos, int len, int rows)
 {
 	int i;
 	int row_off;
@@ -81,10 +81,10 @@ void	ft_place_x(int pos, int len, int rows)
 	row_off = 0;
 	while (row_off <= rows)
 	{
-		i = pos + (row_off * g_map.x_size);
+		i = pos + (row_off * t_map->x_size);
 		while (count < len)
 		{
-			g_table[i] = 2;
+			t_map->table[i] = 2;
 			i++;
 			count++;
 		}

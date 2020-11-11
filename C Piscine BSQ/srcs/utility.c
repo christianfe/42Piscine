@@ -12,7 +12,7 @@
 
 #include "bsq.h"
 
-int	ft_atoi(int size)
+int	ft_atoi(t_data *t_map, int size)
 {
 	int ris;
 	int i;
@@ -21,7 +21,7 @@ int	ft_atoi(int size)
 
 	ris = 0;
 	i = 0;
-	if ((fd = open(g_path, O_RDONLY)) == -1)
+	if ((fd = open(t_map->path, O_RDONLY)) == -1)
 			return (0);
 	while (i < size)
 	{

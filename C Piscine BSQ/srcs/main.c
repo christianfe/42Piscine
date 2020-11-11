@@ -12,56 +12,57 @@
 
 #include "bsq.h"
 
-char	*g_path;
-t_map	g_map;
-int		*g_table;
-int		g_start_area;
-int		g_area_col;
-int		g_area_len;
-int		g_area;
+/*char	*ft_read_stdin()
+{
+	char str[1000];
+	gets(str);
+	return (&str);
+}*/
 
-void	ft_print_map(void)
+void	ft_print_map(t_data *t_map)
 {
 	int i;
 
 	i = 0;
-	while (i < (g_map.x_size * g_map.y_size))
+	while (i < t_map->size)
 	{
-		if (g_table[i] == 2)
-			write(1, &g_map.full, 1);
-		else if (g_table[i] == 0)
-			write(1, &g_map.empty, 1);
-		else if (g_table[i] == 1)
-			write(1, &g_map.obstacle, 1);
-		if ((i + 1) % g_map.x_size == 0)
+		if (t_map->table[i] == 2)
+			write(1, &t_map->full, 1);
+		else if (t_map->table[i] == 0)
+			write(1, &t_map->empty, 1);
+		else if (t_map->table[i] == 1)
+			write(1, &t_map->obstacle, 1);
+		if ((i + 1) % t_map->x_size == 0)
 			write(1, "\n", 1);
 		i++;
 	}
-	write (1, "\n", 1);
+	t_map->area = 0;
 }
 
-int		ft_bsq()
+int		ft_bsq(t_data *t_map)
 {
-	if (!ft_create_map())
+	if (!ft_create_map(t_map))
 		return(0);
-	ft_print_map();
-	ft_fullize_map();
-	ft_place_x(g_start_area, g_area_len, g_area_col);
-	ft_print_map();
+	ft_fullize_map(t_map);
+	ft_place_x(t_map, t_map->start_area, t_map->area_len, t_map->area_col);
+	ft_print_map(t_map);
 	return (1);
 }
 
 int		main(int argc, char **argv)
 {
 	int i;
+	t_data	t_map;
 	
-	g_area = 0;
-	g_start_area = 0;
-	g_area_len = 0;
+	t_map.area = 0;
+	t_map.start_area = 0;
+	t_map.area_len = 0;
 	if (argc == 1)
 	{
-		g_path = 0;
-		if (!ft_bsq())
+		char str[1000];
+		gets(str);
+		printf("%s", str);
+		if (!ft_bsq(&t_map))
 		{
 			write(2,"map error\n", 10);
 			return (0);
@@ -72,14 +73,12 @@ int		main(int argc, char **argv)
 		i = 1;
 		while (i < argc)
 		{
-			g_path = argv[i];
-			if (!ft_bsq())
-			{
+			t_map.path = argv[i];
+			if (!ft_bsq(&t_map))
 				write(2,"map error\n", 10);
-				return (0);
-			}
 			i++;
-			free(g_table);
+			if (i != argc)
+				write (1, "\n", 1);
 		}
 	}
 	return (0);
