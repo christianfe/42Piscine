@@ -14,15 +14,15 @@
 
 int	ft_atoi(t_data *t_map, int size)
 {
-	int ris;
-	int i;
-	int fd;
-	char c;
+	int		ris;
+	int		i;
+	int		fd;
+	char	c;
 
 	ris = 0;
 	i = 0;
 	if ((fd = open(t_map->path, O_RDONLY)) == -1)
-			return (0);
+		return (0);
 	while (i < size)
 	{
 		read(fd, &c, 1);

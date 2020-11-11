@@ -12,11 +12,11 @@
 
 #include "bsq.h"
 
-char 	*ft_read_stdin()
+char	*ft_read_stdin(void)
 {
-	char *line;
-	int i;
-	char c;
+	char	*line;
+	int		i;
+	char	c;
 
 	line = malloc(sizeof(char) * 1000);
 	i = 0;
@@ -54,7 +54,7 @@ void	ft_print_map(t_data *t_map)
 int		ft_bsq(t_data *t_map)
 {
 	if (!ft_create_map(t_map))
-		return(0);
+		return (0);
 	ft_fullize_map(t_map);
 	ft_place_x(t_map, t_map->start_area, t_map->area_len, t_map->area_col);
 	ft_print_map(t_map);
@@ -63,9 +63,9 @@ int		ft_bsq(t_data *t_map)
 
 int		main(int argc, char **argv)
 {
-	int i;
+	int		i;
 	t_data	t_map;
-	
+
 	i = 0;
 	t_map.area = 0;
 	t_map.start_area = 0;
@@ -82,10 +82,10 @@ int		main(int argc, char **argv)
 	{
 		t_map.path = argv[i];
 		if (!ft_bsq(&t_map))
-			write(2,"map error\n", 10);
+			write(2, "map error\n", 10);
 		i++;
 		if (i != argc)
-			write (1, "\n", 1);
+			write(1, "\n", 1);
 	}
 	return (0);
 }

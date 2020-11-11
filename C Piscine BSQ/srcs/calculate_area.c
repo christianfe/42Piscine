@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calculate_area->c                                   :+:      :+:    :+:   */
+/*   calculate_area.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 12:07:42 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/11/11 12:07:44 by cfelicio         ###   ########.fr       */
+/*   Updated: 2020/11/11 17:38:18 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ int		ft_calculate_len(t_data *t_map, int pos, int len)
 {
 	int temp;
 	int pos2;
-	
+
 	pos2 = pos;
 	temp = 0;
-	while(ft_is_free(t_map, pos, 0) && temp <= len && len <= t_map->x_size - (1 + (pos2 % t_map->x_size)))
+	while (ft_is_free(t_map, pos, 0) && temp <= len &&
+		len <= t_map->x_size - (1 + (pos2 % t_map->x_size)))
 	{
 		temp++;
 		pos++;
@@ -29,12 +30,14 @@ int		ft_calculate_len(t_data *t_map, int pos, int len)
 	return (1);
 }
 
-int		ft_calculate_down(t_data *t_map,int pos, int down, int len)
+int		ft_calculate_down(t_data *t_map, int pos, int down, int len)
 {
 	int temp;
-	
+
 	temp = 1;
-	while(ft_is_free(t_map, (pos + (t_map->x_size * temp)), 0) && (pos + (t_map->x_size * temp)) < t_map->size && temp <= down && ft_calculate_len(t_map, (pos + (t_map->x_size * temp)), len - 1))
+	while (ft_is_free(t_map, (pos + (t_map->x_size * temp)), 0) &&
+		(pos + (t_map->x_size * temp)) < t_map->size && temp <= down &&
+		ft_calculate_len(t_map, (pos + (t_map->x_size * temp)), len - 1))
 		temp++;
 	if (temp - 1 != down)
 		return (0);
@@ -44,9 +47,11 @@ int		ft_calculate_down(t_data *t_map,int pos, int down, int len)
 int		ft_calculate_up(t_data *t_map, int pos, int up, int len)
 {
 	int temp;
-	
+
 	temp = 1;
-	while(ft_is_free(t_map, (pos - (t_map->x_size * temp)), 0) && (pos - (t_map->x_size * temp)) >= 0 && temp <= up && ft_calculate_len(t_map, (pos - (t_map->x_size * temp)), len - 1))
+	while (ft_is_free(t_map, (pos - (t_map->x_size * temp)), 0) &&
+		(pos - (t_map->x_size * temp)) >= 0 && temp <= up &&
+		ft_calculate_len(t_map, (pos - (t_map->x_size * temp)), len - 1))
 		temp++;
 	if (temp - 1 != up)
 		return (0);
@@ -66,7 +71,8 @@ void	ft_fullize_map(t_data *t_map)
 		up = 0;
 		down = 0;
 		len = 1;
-		if ((!ft_is_free(t_map, pos, -1)|| ft_is_border(t_map,pos, 'v')) && ft_is_free(t_map, pos, 0))
+		if ((!ft_is_free(t_map, pos, -1) || ft_is_border(t_map, pos, 'v')) &&
+			ft_is_free(t_map, pos, 0))
 		{
 			while (ft_calculate_len(t_map, pos, len) == 1)
 				len++;
@@ -82,7 +88,7 @@ void	ft_fullize_map(t_data *t_map)
 			while (ft_calculate_down(t_map, pos, down, len) == 1)
 				down++;
 			down--;
-			ft_place_x(t_map,(pos - (t_map->x_size * up)), len, up + down);
+			ft_place_x(t_map, (pos - (t_map->x_size * up)), len, up + down);
 			if (t_map->area < ft_calculate_area(t_map))
 			{
 				t_map->area = ft_calculate_area(t_map);

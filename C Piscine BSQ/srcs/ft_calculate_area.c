@@ -12,11 +12,11 @@
 
 #include "bsq.h"
 
-int 	ft_calculate_area(t_data *t_map)
+int		ft_calculate_area(t_data *t_map)
 {
 	int i;
 	int area;
-	
+
 	i = 0;
 	area = 0;
 	while (i < t_map->size)
@@ -67,7 +67,7 @@ int		ft_is_border(t_data *t_map, int pos, char c)
 	{
 		if (pos % (t_map->x_size - 1) == 0)
 			return (1);
-	}	
+	}
 	return (0);
 }
 
@@ -90,5 +90,5 @@ void	ft_place_x(t_data *t_map, int pos, int len, int rows)
 		}
 		row_off++;
 		count = 0;
-	} 
+	}
 }
