@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bsq.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/11 12:07:09 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/11 12:07:18 by cfelicio         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef BSQ_H
 # define BSQ_H
 
@@ -6,7 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-typedef struct	g_p
+typedef struct	s_map
 {
 	int		x_size;
 	int		y_size;
@@ -14,6 +26,11 @@ typedef struct	g_p
 	char	full;
 	char	empty;
 	char	obstacle;
+	char	*path;
+	int		area;
+	int		area_len;
+	int		area_col;
+	int		*table;
 }				t_map;
 
 extern char		*g_path;

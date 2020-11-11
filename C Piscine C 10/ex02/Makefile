@@ -1,28 +1,21 @@
-SRCS		= ft_tail.c ft_tail_2.c
+CFLAGS = -Wall -Wextra -Werror
 
-OBJS		= ${SRCS:.c=.o}
+TARGET = ft_tail
+SOURCES = $(wildcard *.c)
+OBJECTS = $(SOURCES:.c=.o)
 
-NAME		= ft_tail
+all: $(TARGET)
 
-FLAGS		= -Wall -Wextra -Werror
+$(TARGET): $(OBJECTS)
+	gcc $(CFLAGS) -o $@ $^
 
-CC			= gcc
-
-.c.o:
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-
-${NAME}:	${OBJS}
-			${CC} ${FLAGS} ${SRCS} -o ${NAME}
-			rm -f ${OBJS}
+%.o: %.c
+	gcc $(CFLAGS) -c $<
 
 clean:
-			rm -f ${OBJS}
+	rm -f $(OBJECTS)
 
-fclean:		clean
-			rm -f ${NAME}
+fclean: clean
+	rm -f $(TARGET)
 
-re:			fclean all
-
-all:		${NAME}
-
-.PHONY:		all clean fclean re ${NAME} .c.o
+re: fclean all

@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.c                                          :+:      :+:    :+:   */
+/*   ex02.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 12:08:26 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/11/11 12:08:29 by cfelicio         ###   ########.fr       */
+/*   Created: 2020/11/11 13:37:57 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/11 13:37:59 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bsq.h"
+#ifndef EX02_H
+# define EX02_H
 
-int	ft_atoi(int size)
-{
-	int ris;
-	int i;
-	int fd;
-	char c;
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <libgen.h>
+# include <errno.h>
+# include <string.h>
 
-	ris = 0;
-	i = 0;
-	if ((fd = open(g_path, O_RDONLY)) == -1)
-			return (0);
-	while (i < size)
-	{
-		read(fd, &c, 1);
-		ris *= 10;
-		ris += (c - '0');
-		i++;
-	}
-	close(fd);
-	return (ris);
-}
+extern char *g_prog;
+
+void	ft_putstr(char *str);
+void	print_error_msg(char *file);
+int		ft_atoi(char *str);
+
+#endif

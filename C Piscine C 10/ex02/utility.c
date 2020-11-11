@@ -5,31 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 12:08:26 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/11/11 12:08:29 by cfelicio         ###   ########.fr       */
+/*   Created: 2020/11/11 13:38:10 by cfelicio          #+#    #+#             */
+/*   Updated: 2020/11/11 13:38:11 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bsq.h"
+#include "ex02.h"
 
-int	ft_atoi(int size)
+void	ft_putstr(char *str)
 {
-	int ris;
-	int i;
-	int fd;
-	char c;
+	while (*str)
+		write(1, str++, 1);
+}
 
-	ris = 0;
-	i = 0;
-	if ((fd = open(g_path, O_RDONLY)) == -1)
-			return (0);
-	while (i < size)
+void	print_error_msg(char *file)
+{
+	ft_putstr(basename(g_prog));
+	ft_putstr(": ");
+	ft_putstr(file);
+	ft_putstr(": ");
+	ft_putstr(strerror(errno));
+	ft_putstr("\n");
+}
+
+int		ft_atoi(char *str)
+{
+	int ret;
+
+	ret = 0;
+	while (*str)
 	{
-		read(fd, &c, 1);
-		ris *= 10;
-		ris += (c - '0');
-		i++;
+		ret *= 10;
+		ret += (*(str++) - '0');
 	}
-	close(fd);
-	return (ris);
+	return (ret);
 }
