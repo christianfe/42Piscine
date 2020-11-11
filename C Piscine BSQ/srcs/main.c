@@ -12,12 +12,24 @@
 
 #include "bsq.h"
 
-/*char	*ft_read_stdin()
+char 	*ft_read_stdin()
 {
-	char str[1000];
-	gets(str);
-	return (&str);
-}*/
+	char *line;
+	int i;
+	char c;
+
+	line = malloc(sizeof(char) * 1000);
+	i = 0;
+	read(1, &c, 1);
+	while (c != '\n')
+	{
+		line[i] = c;
+		read(1, &c, 1);
+		i++;
+	}
+	line[i] = 0;
+	return (line);
+}
 
 void	ft_print_map(t_data *t_map)
 {
@@ -54,32 +66,26 @@ int		main(int argc, char **argv)
 	int i;
 	t_data	t_map;
 	
+	i = 0;
 	t_map.area = 0;
 	t_map.start_area = 0;
 	t_map.area_len = 0;
 	if (argc == 1)
 	{
-		char str[1000];
-		gets(str);
-		printf("%s", str);
-		if (!ft_bsq(&t_map))
-		{
-			write(2,"map error\n", 10);
-			return (0);
-		}
-	}
-	else
-	{
-		i = 1;
-		while (i < argc)
-		{
-			t_map.path = argv[i];
-			if (!ft_bsq(&t_map))
-				write(2,"map error\n", 10);
+		argv = ft_split(ft_read_stdin(), " ");
+		while (argv[i] != 0)
 			i++;
-			if (i != argc)
-				write (1, "\n", 1);
-		}
+		argc = i;
+	}
+	i = 1;
+	while (i < argc)
+	{
+		t_map.path = argv[i];
+		if (!ft_bsq(&t_map))
+			write(2,"map error\n", 10);
+		i++;
+		if (i != argc)
+			write (1, "\n", 1);
 	}
 	return (0);
 }

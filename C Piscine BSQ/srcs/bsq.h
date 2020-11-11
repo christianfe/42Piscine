@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include <stdlib.h>
 
 typedef struct	s_data
@@ -48,5 +47,6 @@ int		ft_atoi(t_data *t_map, int size);
 void	ft_place_x(t_data *t_map, int pos, int len, int rows);
 void	ft_print_map(t_data *t_map);
 int		ft_bsq(t_data *t_map);
+char	**ft_split(char *str, char *charset);
 
 #endif

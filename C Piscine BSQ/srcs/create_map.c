@@ -59,7 +59,6 @@ int ft_all_row(t_data *t_map, int fd, int *size)
 		if (c != t_map->empty && c != t_map->obstacle && c != '\n')
 			return (0);
 	}
-	printf("%i %i\n", row, t_map->y_size);
 	if (row != t_map->y_size)
 		return (0);
 	if (c == '\n')

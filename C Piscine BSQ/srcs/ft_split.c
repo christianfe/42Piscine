@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bsq.h"
+#include <stdlib.h>
 
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
@@ -101,6 +101,11 @@ char	**ft_split(char *str, char *charset)
 		return (0);
 	i = 0;
 	pos_in_str = str;
+	
+	if (!(strs[i] = (char *)malloc(sizeof(char) * 10)))
+			return (0);
+	strs[0] = "ciao";
+	i++;
 	while ((next_str = ft_get_next_str(&pos_in_str, charset, &next_str_len)))
 	{
 		if (!(strs[i] = (char *)malloc(sizeof(char) * next_str_len + 1)))
