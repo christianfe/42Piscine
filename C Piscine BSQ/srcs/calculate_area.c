@@ -3,9 +3,11 @@
 int		ft_calculate_len(int pos, int len)
 {
 	int temp;
+	int pos2;
 	
-	temp = 1;
-	while(ft_is_free(pos, 0) && !ft_is_border(pos + 1, 'v') && temp <= len)
+	pos2 = pos;
+	temp = 0;
+	while(ft_is_free(pos, 0) && temp <= len && len <= g_map.x_size - (1 + (pos2 % g_map.x_size)))
 	{
 		temp++;
 		pos++;
@@ -52,7 +54,7 @@ void	ft_fullize_map(void)
 		up = 0;
 		down = 0;
 		len = 1;
-		if (!ft_is_free(pos, -1) || ft_is_border(pos, 'v'))
+		if ((!ft_is_free(pos, -1)|| ft_is_border(pos, 'v')) && ft_is_free(pos, 0))
 		{
 			while (ft_calculate_len(pos, len) == 1)
 				len++;
@@ -62,13 +64,12 @@ void	ft_fullize_map(void)
 				;
 			else if (ft_is_free(pos + len, 0))
 				len--;
-			/*while (ft_calculate_up(pos, up, len) == 1)
+			while (ft_calculate_up(pos, up, len) == 1)
 				up++;
 			up--;
-			printf("%i\t%i\t*%i*\t%i\n", pos ,len, up, down);
 			while (ft_calculate_down(pos, down, len) == 1)
 				down++;
-			down--;*/
+			down--;
 			ft_place_x((pos - (g_map.x_size * up)), len, up + down);
 			if (g_area < ft_calculate_area())
 			{
@@ -77,10 +78,8 @@ void	ft_fullize_map(void)
 				g_start_area = (pos - (g_map.x_size * up));
 				g_area_col = up + down;
 			}
-			ft_print_map();
 			ft_free_array();
 		}
-		//break;
 		pos++;
 	}
 }

@@ -100,7 +100,6 @@ int		ft_create_map()
 		ft_read_stdin();
 	if (!ft_checkmap())
 		return(0);
-	printf("@@%i\n", g_size_file);
 	if ((g_table = malloc(sizeof(int) * (1 + g_size_file))) == NULL)
 		return (0);
 	if ((fd = open(g_path, O_RDONLY)) == -1)
