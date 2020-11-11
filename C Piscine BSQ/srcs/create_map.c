@@ -31,6 +31,22 @@ int		ft_first_row(t_data *t_map, int fd)
 	return (1);
 }
 
+int		ft_all_row2(t_data *t_map, char *c, int *len, int *row)
+{
+	if (*c == '\n')
+	{
+		if (t_map->x_size == 0)
+			t_map->x_size = *len - 1;
+		else if (t_map->x_size == *len - 1)
+			;
+		else
+			return (0);
+		*len = 0;
+		*row += 1;
+	}
+	return (1);
+}
+
 int		ft_all_row(t_data *t_map, int fd, int *size)
 {
 	char	c;
@@ -45,17 +61,8 @@ int		ft_all_row(t_data *t_map, int fd, int *size)
 	{
 		len++;
 		*size += 1;
-		if (c == '\n')
-		{
-			if (t_map->x_size == 0)
-				t_map->x_size = len - 1;
-			else if (t_map->x_size == len - 1)
-				;
-			else
-				return (0);
-			len = 0;
-			row++;
-		}
+		if (!ft_all_row2(t_map, &c, &len, &row))
+			return (0);
 		if (c != t_map->empty && c != t_map->obstacle && c != '\n')
 			return (0);
 	}

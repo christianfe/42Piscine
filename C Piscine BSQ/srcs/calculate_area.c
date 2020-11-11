@@ -58,43 +58,47 @@ int		ft_calculate_up(t_data *t_map, int pos, int up, int len)
 	return (1);
 }
 
+void	ft_fullize_map2(t_data *t_map, int pos, int *len)
+{
+	while (ft_calculate_len(t_map, pos, len[0]) == 1)
+		len[0]++;
+	if (pos == 0 && !ft_is_free(t_map, 0, 0))
+		len[0]++;
+	else if (ft_is_border(t_map, pos + len[0], 'v'))
+		;
+	else if (ft_is_free(t_map, pos + len[0], 0))
+		len[0]--;
+	while (ft_calculate_up(t_map, pos, len[1], len[0]) == 1)
+		len[1]++;
+	len[1]--;
+	while (ft_calculate_down(t_map, pos, len[2], len[0]) == 1)
+		len[2]++;
+	len[2]--;
+	ft_place_x(t_map, (pos - (t_map->x_size * len[1])),
+				len[0], len[1] + len[2]);
+}
+
 void	ft_fullize_map(t_data *t_map)
 {
 	int pos;
-	int len;
-	int up;
-	int down;
+	int len[3];
 
 	pos = 0;
 	while (pos < t_map->size)
 	{
-		up = 0;
-		down = 0;
-		len = 1;
+		len[1] = 0;
+		len[2] = 0;
+		len[0] = 1;
 		if ((!ft_is_free(t_map, pos, -1) || ft_is_border(t_map, pos, 'v')) &&
 			ft_is_free(t_map, pos, 0))
 		{
-			while (ft_calculate_len(t_map, pos, len) == 1)
-				len++;
-			if (pos == 0 && !ft_is_free(t_map, 0, 0))
-				len++;
-			else if (ft_is_border(t_map, pos + len, 'v'))
-				;
-			else if (ft_is_free(t_map, pos + len, 0))
-				len--;
-			while (ft_calculate_up(t_map, pos, up, len) == 1)
-				up++;
-			up--;
-			while (ft_calculate_down(t_map, pos, down, len) == 1)
-				down++;
-			down--;
-			ft_place_x(t_map, (pos - (t_map->x_size * up)), len, up + down);
+			ft_fullize_map2(t_map, pos, &len[0]);
 			if (t_map->area < ft_calculate_area(t_map))
 			{
 				t_map->area = ft_calculate_area(t_map);
-				t_map->area_len = len;
-				t_map->start_area = (pos - (t_map->x_size * up));
-				t_map->area_col = up + down;
+				t_map->area_len = len[0];
+				t_map->start_area = (pos - (t_map->x_size * len[1]));
+				t_map->area_col = len[1] + len[2];
 			}
 			ft_free_array(t_map);
 		}
