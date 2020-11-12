@@ -6,7 +6,7 @@
 /*   By: cfelicio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 11:35:09 by cfelicio          #+#    #+#             */
-/*   Updated: 2020/11/12 11:35:10 by cfelicio         ###   ########.fr       */
+/*   Updated: 2020/11/12 12:40:40 by cfelicio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_btree	*btree_create_node(void *item)
 }
 
 void	btree_insert_data(t_btree **root, void *item,
-		int (*cmpf)(void *,	void *))
+		int (*cmpf)(void *, void *))
 {
 	if (!*root)
 	{
