@@ -12,6 +12,30 @@
 
 #include "bsq.h"
 
+int		ft_create_map(t_data *t_map)
+{
+	int		fd;
+	char	c;
+	int		i;
+	int		size_file;
+
+	i = 0;
+	size_file = 0;
+	if (!ft_checkmap(t_map, &size_file))
+		return (0);
+	if ((t_map->table = malloc(sizeof(int) * (1 + size_file))) == NULL)
+		return (0);
+	if ((fd = open(t_map->path, O_RDONLY)) == -1)
+		return (0);
+	read(fd, &c, 1);
+	while (c != '\n')
+		read(fd, &c, 1);
+	ft_assign_map(t_map, fd, i);
+	close(fd);
+	t_map->size = t_map->x_size * t_map->y_size;
+	return (1);
+}
+
 char	*ft_read_stdin(void)
 {
 	char	*line;

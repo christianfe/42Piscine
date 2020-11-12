@@ -56,7 +56,6 @@ int		ft_all_row(t_data *t_map, int fd, int *size)
 	len = 0;
 	row = 0;
 	t_map->x_size = 0;
-	read(fd, &c, 1);
 	while (read(fd, &c, 1))
 	{
 		len++;
@@ -66,7 +65,7 @@ int		ft_all_row(t_data *t_map, int fd, int *size)
 		if (c != t_map->empty && c != t_map->obstacle && c != '\n')
 			return (0);
 	}
-	if (row != t_map->y_size)
+	if (row - 1 != t_map->y_size)
 		return (0);
 	if (c == '\n')
 		return (1);
@@ -103,33 +102,17 @@ int		ft_checkmap(t_data *t_map, int *size)
 	return (1);
 }
 
-int		ft_create_map(t_data *t_map)
+void	ft_assign_map(t_data *t_map, int fd, int i)
 {
-	int		fd;
-	char	c;
-	int		i;
-	int		size_file;
+	char c;
 
-	i = 0;
-	size_file = 0;
-	if (!ft_checkmap(t_map, &size_file))
-		return (0);
-	if ((t_map->table = malloc(sizeof(int) * (1 + size_file))) == NULL)
-		return (0);
-	if ((fd = open(t_map->path, O_RDONLY)) == -1)
-		return (0);
-	read(fd, &c, 1);
-	while (c != '\n')
-		read(fd, &c, 1);
-	while (read(fd, &c, 1) && ++i > -1)
+	while (read(fd, &c, 1))
+	{
 		if (c == t_map->empty)
 			t_map->table[i] = 0;
 		else if (c == t_map->obstacle)
 			t_map->table[i] = 1;
-	close(fd);
-	t_map->size = t_map->x_size * t_map->y_size;
-	ft_print_map(t_map);
-	write(1, "\n", 1);
-	printf("%i %i %i\n", t_map->x_size, t_map->y_size, t_map->size);
-	return (1);
+		if (c != '\n')
+			i++;
+	}
 }

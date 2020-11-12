@@ -18,16 +18,14 @@ int		ft_calculate_len(t_data *t_map, int pos, int len)
 	int pos2;
 
 	pos2 = pos;
-	temp = 1;
-	while ((ft_is_free(t_map, pos, 0)) && temp <= len &&
-		(pos == 0 || len <= t_map->x_size - (1 + (pos2 % t_map->x_size))))
+	temp = 0;
+	while (ft_is_free(t_map, pos, 0) && temp <= len &&
+		len <= t_map->x_size - (1 + (pos2 % t_map->x_size)))
 	{
 		temp++;
 		pos++;
 	}
-	if (temp - 1 < len)
-		return (0);
-	if (!ft_is_free(t_map, pos, 0))
+	if (temp - 1 != len)
 		return (0);
 	return (1);
 }
@@ -63,27 +61,21 @@ int		ft_calculate_up(t_data *t_map, int pos, int up, int len)
 void	ft_fullize_map2(t_data *t_map, int pos, int *len)
 {
 	while (ft_calculate_len(t_map, pos, len[0]) == 1)
-	{
 		len[0]++;
-		while (ft_calculate_up(t_map, pos, len[1], len[0]) == 1)
-			len[1]++;
-		len[1]--;
-		while (ft_calculate_down(t_map, pos, len[2], len[0]) == 1)
-			len[2]++;
-		len[2]--;
-		ft_place_x(t_map, (pos - (t_map->x_size * len[1])),
+	if (pos == 0 && !ft_is_free(t_map, 0, 0))
+		len[0]++;
+	else if (ft_is_border(t_map, pos + len[0], 'v'))
+		;
+	else if (ft_is_free(t_map, pos + len[0], 0))
+		len[0]--;
+	while (ft_calculate_up(t_map, pos, len[1], len[0]) == 1)
+		len[1]++;
+	len[1]--;
+	while (ft_calculate_down(t_map, pos, len[2], len[0]) == 1)
+		len[2]++;
+	len[2]--;
+	ft_place_x(t_map, (pos - (t_map->x_size * len[1])),
 				len[0], len[1] + len[2]);
-		if (t_map->area < ft_calculate_area(t_map))
-		{
-			t_map->area = ft_calculate_area(t_map);
-			t_map->area_len = len[0];
-			t_map->start_area = (pos - (t_map->x_size * len[1]));
-			t_map->area_col = len[1] + len[2];
-		}
-		ft_free_array(t_map);
-		len[1] = 0;
-		len[2] = 0;
-	}
 }
 
 void	ft_fullize_map(t_data *t_map)
@@ -96,14 +88,18 @@ void	ft_fullize_map(t_data *t_map)
 	{
 		len[1] = 0;
 		len[2] = 0;
-		len[0] = 0;
+		len[0] = 1;
 		if ((!ft_is_free(t_map, pos, -1) || ft_is_border(t_map, pos, 'v')) &&
 			ft_is_free(t_map, pos, 0))
 		{
 			ft_fullize_map2(t_map, pos, &len[0]);
-			len[0] = 0;
-			len[1] = 0;
-			len[2] = 0;
+			if (t_map->area < ft_calculate_area(t_map))
+			{
+				t_map->area = ft_calculate_area(t_map);
+				t_map->area_len = len[0];
+				t_map->start_area = (pos - (t_map->x_size * len[1]));
+				t_map->area_col = len[1] + len[2];
+			}
 			ft_free_array(t_map);
 		}
 		pos++;
