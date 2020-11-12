@@ -12,17 +12,6 @@
 
 #include "ft_btree.h"
 
-t_btree	*btree_create_node(void *item)
-{
-	t_btree *new;
-
-	new = (t_btree*)malloc(sizeof(t_btree));
-	new->item = item;
-	new->left = 0;
-	new->right = 0;
-	return (new);
-}
-
 void	btree_insert_data(t_btree **root, void *item,
 		int (*cmpf)(void *, void *))
 {
