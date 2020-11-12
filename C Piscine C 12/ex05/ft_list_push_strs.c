@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_list.h"
+#include <stdlib.h>
 
 t_list	*ft_create_elem(void *data)
 {
@@ -33,7 +34,7 @@ t_list	*ft_list_push_strs(int size, char **strs)
 	while (i < size)
 	{
 		temp = first;
-		first = ft_create_elem(*strs[i]);
+		first = ft_create_elem(strs[i]);
 		first->next = temp;
 		i++;
 	}

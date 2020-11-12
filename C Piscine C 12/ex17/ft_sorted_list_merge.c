@@ -49,9 +49,9 @@ int		ft_is_null(t_list **begin_list1, t_list *begin_list2)
 void	ft_sorted_list_merge(t_list **begin_list1, t_list *begin_list2,
 		int (*cmp)())
 {
-	if (is_null(begin_list1, begin_list2))
+	if (ft_is_null(begin_list1, begin_list2))
 		return ;
-	init(*begin_list1, begin_list2, cmp);
+	ft_init(*begin_list1, begin_list2, cmp);
 	*begin_list1 = g_head;
 	while (g_l && g_r)
 	{
