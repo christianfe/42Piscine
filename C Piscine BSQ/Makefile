@@ -8,14 +8,13 @@ FLAGS		= -Wall -Wextra -Werror -g
 
 CC		= gcc
 
-.c.o:
-			${CC} ${FLAGS} -c $< -o ${<:.c=.o}
-
 ${NAME}:	${OBJS}
 			${CC} -o ${NAME} ${OBJS}
-			rm ${OBJS}
 
 all:		${NAME}
+
+.c.o:
+			${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
 clean:
 			rm -f ${OBJS}
@@ -24,5 +23,3 @@ fclean:		clean
 			rm -f ${NAME}
 
 re:			fclean all
-
-.PHONY:		all clean fclean re ${NAME} norm .c.o
