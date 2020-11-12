@@ -25,19 +25,4 @@ fclean:		clean
 
 re:			fclean all
 
-do:			
-			./gen/generator.pl 10 10 20 > ./gen/mapf
-			./gen/generator.pl 10 10 3 > ./gen/map
-			./gen/generator.pl 5 12 4 > ./gen/map1
-			./gen/generator.pl 7 5 3 > ./gen/map2
-			./gen/generator.pl 50 20 2 > ./gen/map3
-			./${NAME} "./gen/map" "./gen/map1" "./gen/map2" "./gen/map3"
-
-run:
-			./${NAME} "./gen/map"
-
-norm:
-			norminette -R CheckForbiddenSourceHeader */*.c
-			norminette -R CheckDefine */*.h
-
 .PHONY:		all clean fclean re ${NAME} norm .c.o
