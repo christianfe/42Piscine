@@ -2,6 +2,8 @@ cfelicio 42 Piscine
 Rome - Italy
 FROM 19 10 2020 TO 13 11 2020
 
+*During Piscine, we have norme rules: we can't use the for consructor, we cant pass more than 4 parameter, we can't declare more than 4 local variables, we can't write a function longer than 25 rows and other boring things, for that reason the codes may look a bit stranger*
+
 ***PROJECT LIST***
 
 C Piscine Shell 00 (succeded with 100%)
